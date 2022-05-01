@@ -1,5 +1,5 @@
 #意见反馈表
-DROM TABLE IF EXISTS `video_system_feedback`;
+DROP TABLE IF EXISTS `video_system_feedback`;
 CREATE TABLE `video_system_feedback` (
      `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '主键id',
      `task_id` int(10) NOT NULL COMMENT '任务id',

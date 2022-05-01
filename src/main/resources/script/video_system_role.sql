@@ -1,5 +1,5 @@
 #角色表
-DROM TABLE IF EXISTS `video_system_role`;
+DROP TABLE IF EXISTS `video_system_role`;
 CREATE TABLE `video_system_role` (
      `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '主键id',
      `role_name` varchar(20) NOT NULL COMMENT '角色名称',

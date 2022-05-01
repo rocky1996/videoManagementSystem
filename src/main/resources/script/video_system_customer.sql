@@ -1,5 +1,5 @@
 #客户表
-DROM TABLE IF EXISTS `video_system_customer`;
+DROP TABLE IF EXISTS `video_system_customer`;
 CREATE TABLE `video_system_customer` (
      `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '主键id',
      `customer_name` varchar(20) NOT NULL COMMENT '客户名称',
