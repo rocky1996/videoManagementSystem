@@ -1,5 +1,5 @@
 #用户表
-DROM TABLE IF EXISTS `video_system_user`;
+DROP TABLE IF EXISTS `video_system_user`;
 CREATE TABLE `video_system_user` (
     `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '主键id',
     `username` varchar(20) NOT NULL COMMENT '用户名',

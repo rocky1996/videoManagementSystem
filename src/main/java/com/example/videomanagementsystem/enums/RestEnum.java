@@ -3,6 +3,7 @@ package com.example.videomanagementsystem.enums;
 public enum RestEnum {
 
     SUCCESS(0, "成功"),
+    NO_PERMISSION(401, "没有权限"),
     SYSTEM_ERROR(500, "系统错误"),
     ;
 

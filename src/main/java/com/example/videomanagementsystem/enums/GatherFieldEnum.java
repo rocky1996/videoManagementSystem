@@ -3,7 +3,7 @@ package com.example.videomanagementsystem.enums;
 import java.util.HashMap;
 import java.util.Map;
 
-public enum GatherAuthEnum {
+public enum GatherFieldEnum {
 
     GATHER_VIDEO(0, "采集视频"),
     COMMENT_VOLUME(1, "评论量"),
@@ -21,13 +21,13 @@ public enum GatherAuthEnum {
     ;
 
     private Integer code;
-    private String desc;
+    private String name;
 
-    GatherAuthEnum() {}
+    GatherFieldEnum() {}
 
-    GatherAuthEnum(Integer code, String desc) {
+    GatherFieldEnum(Integer code, String name) {
         this.code = code;
-        this.desc = desc;
+        this.name = name;
     }
 
     public Integer getCode() {
@@ -38,22 +38,22 @@ public enum GatherAuthEnum {
         this.code = code;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getName() {
+        return name;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    private static Map<Integer, GatherAuthEnum> enumMap = new HashMap<>();
+    private static Map<Integer, GatherFieldEnum> enumMap = new HashMap<>();
     static {
-        for (GatherAuthEnum gatherAuthEnum : values()) {
-            enumMap.put(gatherAuthEnum.getCode(), gatherAuthEnum);
+        for (GatherFieldEnum gatherFieldEnum : values()) {
+            enumMap.put(gatherFieldEnum.getCode(), gatherFieldEnum);
         }
     }
 
-    public static GatherAuthEnum getGatherAuthEnum(Integer code) {
+    public static GatherFieldEnum getGatherFieldEnum(Integer code) {
         return enumMap.get(code);
     }
 }

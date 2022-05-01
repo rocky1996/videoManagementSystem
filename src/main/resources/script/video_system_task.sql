@@ -1,4 +1,4 @@
-DROM TABLE IF EXISTS `video_system_task`;
+DROP TABLE IF EXISTS `video_system_task`;
 CREATE TABLE `video_system_task` (
      `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '主键id',
      `user_id` int(10) NOT NULL COMMENT '用户id',
