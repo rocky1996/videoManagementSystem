@@ -3,3 +3,28 @@ server:
 
 spring:
   profiles: test
+
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://127.0.0.1:3306/videoManagementSystem?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+    driver-class-name: com.mysql.jdbc.Driver
+    type: org.springframework.jdbc.datasource.DriverManagerDataSource
+    dbcp2:
+      min-idle: 10
+      initial-size: 10
+      max-wait-millis: 60000
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: select 'x'
+      test-while-idle: true
+      test-on-borrow: true
+      test-on-return: false
+      pool-prepared-statements: true
+      remove-abandoned-on-borrow: true
+      remove-abandoned-on-maintenance: true
+      connection-init-sqls: set names utf8mb4
+
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml
+  type-aliases-package: com.example.videomanagementsystem.domain
