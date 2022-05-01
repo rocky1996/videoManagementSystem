@@ -5,10 +5,11 @@ import java.util.Map;
 
 public enum MediaSourceEnum {
 
-    WEBSITE(0, "网站"),
-    YOUTUBE(1, "YouTube"),
-    FACEBOOK(2, "FaceBook"),
-    TWITTER(3, "Twitter"),
+    ALL(0, "ALL"),
+    WEBSITE(1, "网站"),
+    YOUTUBE(2, "YouTube"),
+    FACEBOOK(3, "FaceBook"),
+    TWITTER(4, "Twitter"),
     ;
 
     private Integer code;
