@@ -21,9 +21,9 @@
         </commentGenerator>
 
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/course"
+                        connectionURL="jdbc:mysql://localhost:3306/videoManagementSystem"
                         userId="root"
-                        password="****">
+                        password="root">
         </jdbcConnection>
 
         <!-- domain类的位置 -->
@@ -40,6 +40,17 @@
                              type="XMLMAPPER" />
 
 
-        <table tableName="test" domainObjectName="Test"/>
+        <table tableName="video_system_user" domainObjectName="VideoSystemUser">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="video_system_role" domainObjectName="VideoSystemRole">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="video_system_customer" domainObjectName="VideoSystemCustomer">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="video_system_feedback" domainObjectName="VideoSystemFeedback">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
     </context>
 </generatorConfiguration>
