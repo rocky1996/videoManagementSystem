@@ -1,2 +1,2 @@
 接口地址:
-    https://console.apipost.cn/apis/project
+    https://console-docs.apipost.cn/preview/3b677b4073aaae92/1492df02fe6dda62
