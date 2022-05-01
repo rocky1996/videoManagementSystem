@@ -7,7 +7,7 @@ spring:
   datasource:
     username: root
     password: root
-    url: jdbc:mysql://127.0.0.1:3306/videoManagementSystem?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+    url: jdbc:mysql://175.24.118.64:3306/videoManagementSystem?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
     driver-class-name: com.mysql.jdbc.Driver
     type: org.springframework.jdbc.datasource.DriverManagerDataSource
     dbcp2:
