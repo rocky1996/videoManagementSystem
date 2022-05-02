@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.videomanagementsystem.mapper.VideoSystemTaskMapper">
+
+    <sql id="common_task_code">
+        task_name, task_type,gather_video_start_time as gather_start_time,gather_video_end_time as gather_end_time,
+         gather_video_time as gather_time,
+         push_time,gather_type,media_scope,is_proofreading,gather_field, task_open_status
+    </sql>
+    <sql id="common_task_config_code">
+
+    </sql>
+    <update id="deleteTask">
+
+         update video_system_task set is_delete = 1 where id = #{taskId}
+    </update>
+    <update id="updateTaskOpenStatus">
+        update video_system_task set task_open_status = #{code} where id = #{taskId}
+    </update>
+    <update id="deleteTaskConfig">
+        update video_system_task_config set is_delete = 1 where video_system_task_id = #{taskId}
+    </update>
+
+    <insert id="createSystemTask" parameterType="com.example.videomanagementsystem.domain.VideoSystemTask">
+
+     insert into video_system_task(
+        user_id,
+         task_name, task_type,gather_video_start_time ,gather_video_end_time,
+         gather_video_time,
+         push_time,gather_type,is_proofreading,gather_field, task_open_status,task_status,is_delete
+         ,create_time,update_time
+     )
+    values (#{videoSystemTask.userId},#{videoSystemTask.taskName},#{videoSystemTask.taskType},#{videoSystemTask.gatherStartTime}
+           ,#{videoSystemTask.gatherEndTime},#{videoSystemTask.gatherTime},#{videoSystemTask.pushTime},#{videoSystemTask.gatherType}
+           ,#{videoSystemTask.isProofreading},#{videoSystemTask.gatherField},#{videoSystemTask.taskOpenStatus},#{videoSystemTask.taskStatus},#{videoSystemTask.isDelete}
+           ,#{videoSystemTask.createTime},#{videoSystemTask.updateTime})
+
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            select last_insert_id() as id
+        </selectKey>
+    </insert>
+    <insert id="createTaskConfig">
+
+        insert into video_system_task_config(user_id,video_system_task_id,media_scope,include_arbitrarily_keyword,include_all_keyword,
+                                             shield_arbitrarily_keyword,website_name,website_url,blogger_id_str,
+                                             is_delete,create_time,update_time)
+          values
+        <foreach collection="list" separator="," item="item">
+            (#{item.userId},#{item.videoSystemTaskId},#{item.mediaScope},#{item.includeArbitrarilyKw},#{item.includeAllKw},#{item.shieldArbitrarilyKw}
+            ,#{item.websiteName},#{item.websiteUrl},#{item.bloggerIdStr},#{item.idDelete},#{item.createTime},#{item.updateTime})
+        </foreach>
+
+    </insert>
+
+</mapper>
