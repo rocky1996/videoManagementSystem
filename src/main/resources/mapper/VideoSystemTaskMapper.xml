@@ -21,7 +21,7 @@
         update video_system_task_config set is_delete = 1 where video_system_task_id = #{taskId}
     </update>
 
-    <insert id="createSystemTask" parameterType="com.example.videomanagementsystem.domain.VideoSystemTask">
+    <insert id="createSystemTask" parameterType="com.example.videomanagementsystem.domain.VideoSystemTask" useGeneratedKeys="true">
 
      insert into video_system_task(
         user_id,
@@ -35,9 +35,9 @@
            ,#{videoSystemTask.isProofreading},#{videoSystemTask.gatherField},#{videoSystemTask.taskOpenStatus},#{videoSystemTask.taskStatus},#{videoSystemTask.isDelete}
            ,#{videoSystemTask.createTime},#{videoSystemTask.updateTime})
 
-        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
-            select last_insert_id() as id
-        </selectKey>
+<!--        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">-->
+<!--            select last_insert_id() as id-->
+<!--        </selectKey>-->
     </insert>
     <insert id="createTaskConfig">
 
