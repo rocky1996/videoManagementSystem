@@ -10,7 +10,7 @@ CREATE TABLE `video_system_task` (
      `push_time` datatime NOT NULL COMMENT '推送时间',
      `gather_type` int(2) NOT NULL COMMENT '0:关键字采集,1:定源采集,2:关键字+定源采集',
      `is_proofreading` int(2) NOT NULL COMMENT '是否需要校审,0:是,1:否',
-     `gather_auth_str` text DEFAULT NULL COMMENT '该用户的采集权限,可以为空,例如1,2,3,4,  以逗号隔开',
+     `gather_field` text DEFAULT NULL COMMENT '该用户的采集权限,可以为空,例如1,2,3,4,  以逗号隔开',
      `task_open_status` int(2) NOT NULL COMMENT '0:开启,1:关闭',
      `task_status` int(2) NOT NULL COMMENT '0:未开始,1:运行中,2:已结束,3:已停止',
      `is_delete` int(2) DEFAULT 0 COMMENT '逻辑删除,0:未删除,1:已删除',
