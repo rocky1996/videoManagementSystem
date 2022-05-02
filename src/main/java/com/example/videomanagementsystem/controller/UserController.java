@@ -10,10 +10,9 @@ import com.example.videomanagementsystem.enums.RestEnum;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,7 +25,7 @@ public class UserController {
     private UserDao userDao;
 
     @GetMapping
-    public RestResult<PageResult<UserResp>> getUsers(UserQueryReq req) {
+    public RestResult<PageResult<UserResp>> getUsers(@Valid UserQueryReq req) {
         List<VideoSystemUser> users = userDao.getUsers(req.convert());
         PageInfo<VideoSystemUser> pageInfo = new PageInfo<>(users);
         List<UserResp> userRespList = users.stream()
