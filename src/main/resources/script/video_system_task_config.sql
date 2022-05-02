@@ -9,6 +9,7 @@ CREATE TABLE `video_system_task_config` (
      `shield_arbitrarily_keyword` text DEFAULT NULL COMMENT '屏蔽以下任一关键字,多个的话逗号隔开',
      `website_name` varchar(50) DEFAULT NULL COMMENT '网站名称',
      `website_url` text DEFAULT NULL COMMENT '网站url',
+     `blogger_id_str` text DEFAULT NULL COMMENT '博主id字符串,多个以逗号隔开',
      `is_delete` int(2) DEFAULT 0 COMMENT '逻辑删除,0:未删除,1:已删除',
      `create_time` datetime NOT NULL COMMENT '创建时间',
      `update_time` datetime NOT NULL COMMENT '更新时间',
