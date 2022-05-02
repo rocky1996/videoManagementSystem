@@ -9,7 +9,7 @@ public enum TaskStatusEnum {
 
     NOT_STARTED(0, "未开始") {
         @Override
-        public List<TaskStatusEnum> nextStatus(Integer code) {
+        public List<TaskStatusEnum> nextStatus() {
             List<TaskStatusEnum> notStartedList = new LinkedList<>();
             notStartedList.add(TaskStatusEnum.RUNNING);
             notStartedList.add(TaskStatusEnum.OVER);
@@ -19,7 +19,7 @@ public enum TaskStatusEnum {
     },
     RUNNING(1, "运行中") {
         @Override
-        public List<TaskStatusEnum> nextStatus(Integer code) {
+        public List<TaskStatusEnum> nextStatus() {
             List<TaskStatusEnum> runningList = new LinkedList<>();
             runningList.add(TaskStatusEnum.RUNNING);
             runningList.add(TaskStatusEnum.STOPPED);
@@ -28,13 +28,13 @@ public enum TaskStatusEnum {
     },
     OVER(2, "已结束") {
         @Override
-        public List<TaskStatusEnum> nextStatus(Integer code) {
+        public List<TaskStatusEnum> nextStatus() {
             return new LinkedList<>();
         }
     },
     STOPPED(3, "已停止") {
         @Override
-        public List<TaskStatusEnum> nextStatus(Integer code) {
+        public List<TaskStatusEnum> nextStatus() {
             return new LinkedList<>();
         }
     },
@@ -66,7 +66,7 @@ public enum TaskStatusEnum {
         this.name = name;
     }
 
-    public abstract List<TaskStatusEnum> nextStatus(Integer code);
+    public abstract List<TaskStatusEnum> nextStatus();
 
     private static Map<Integer, TaskStatusEnum> enumMap = new HashMap<>();
     static {
