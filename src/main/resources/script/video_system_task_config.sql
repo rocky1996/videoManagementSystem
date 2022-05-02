@@ -1,8 +1,9 @@
-DROP TABLE IF EXISTS `video_system_task`;
-CREATE TABLE `video_system_task` (
+DROP TABLE IF EXISTS `video_system_task_config`;
+CREATE TABLE `video_system_task_config` (
      `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '主键id',
      `user_id` int(10) NOT NULL COMMENT '用户id',
      `video_system_task_id` int(10) NOT NULL COMMENT '任务id',
+     `media_scope` int(2) NOT NULL COMMENT '0:ALL,1:网站,2:YouTube,3:FaceBook,4:Twitter',
      `include_arbitrarily_keyword` text DEFAULT NULL COMMENT '包含以下任一关键字,多个的话逗号隔开',
      `include_all_keyword` text DEFAULT NULL COMMENT '包含以下全部关键字,多个的话逗号隔开',
      `shield_arbitrarily_keyword` text DEFAULT NULL COMMENT '屏蔽以下任一关键字,多个的话逗号隔开',
