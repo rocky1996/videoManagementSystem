@@ -1,14 +1,43 @@
 package com.example.videomanagementsystem.enums;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 public enum TaskStatusEnum {
 
-    NOT_STARTED(0, "未开始"),
-    RUNNING(1, "运行中"),
-    OVER(2, "已结束"),
-    STOPPED(3, "已停止"),
+    NOT_STARTED(0, "未开始") {
+        @Override
+        public List<TaskStatusEnum> nextStatus(Integer code) {
+            List<TaskStatusEnum> notStartedList = new LinkedList<>();
+            notStartedList.add(TaskStatusEnum.RUNNING);
+            notStartedList.add(TaskStatusEnum.OVER);
+            notStartedList.add(TaskStatusEnum.STOPPED);
+            return notStartedList;
+        }
+    },
+    RUNNING(1, "运行中") {
+        @Override
+        public List<TaskStatusEnum> nextStatus(Integer code) {
+            List<TaskStatusEnum> runningList = new LinkedList<>();
+            runningList.add(TaskStatusEnum.RUNNING);
+            runningList.add(TaskStatusEnum.STOPPED);
+            return runningList;
+        }
+    },
+    OVER(2, "已结束") {
+        @Override
+        public List<TaskStatusEnum> nextStatus(Integer code) {
+            return new LinkedList<>();
+        }
+    },
+    STOPPED(3, "已停止") {
+        @Override
+        public List<TaskStatusEnum> nextStatus(Integer code) {
+            return new LinkedList<>();
+        }
+    },
     ;
 
     private Integer code;
@@ -36,6 +65,8 @@ public enum TaskStatusEnum {
     public void setName(String name) {
         this.name = name;
     }
+
+    public abstract List<TaskStatusEnum> nextStatus(Integer code);
 
     private static Map<Integer, TaskStatusEnum> enumMap = new HashMap<>();
     static {
