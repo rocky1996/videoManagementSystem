@@ -7,16 +7,25 @@ import org.hibernate.validator.constraints.Range;
 @Data
 public class UserQueryReq {
 
+    private String username;
+
+    private Integer roleId;
+
+    private Integer statusId;
+
     @Range(min = 1)
-    private int page_num = 1;
+    private int pageNum = 1;
 
     @Range(min = 1, max = 1000)
-    private int page_size = 10;
+    private int pageSize = 10;
 
     public UserQueryParam convert() {
         UserQueryParam param = new UserQueryParam();
-        param.setOffset((page_num - 1) * page_size);
-        param.setSize(page_size);
+        param.setUsername(username);
+        param.setRoleId(roleId);
+        param.setStatusId(statusId);
+        param.setOffset((pageNum - 1) * pageSize);
+        param.setSize(pageSize);
         return param;
     }
 }
