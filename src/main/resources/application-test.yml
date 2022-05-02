@@ -7,7 +7,7 @@ spring:
   datasource:
     username: root
     password: root
-    url: jdbc:mysql://127.0.0.1:3306/videoManagementSystem?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+    url: jdbc:mysql://175.24.118.64:3306/videoManagementSystem?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
     driver-class-name: com.mysql.jdbc.Driver
     type: org.springframework.jdbc.datasource.DriverManagerDataSource
     dbcp2:
@@ -28,3 +28,10 @@ spring:
 mybatis:
   mapper-locations: classpath:mapper/**/*.xml
   type-aliases-package: com.example.videomanagementsystem.domain
+
+pagehelper:
+  helperDialect: mysql
+  reasonable: true                #开启优化，如果开启优化，在分页页码结果没有数据的时候,会显示有数据的页码数据
+  supportMethodsArguments: true   #是否支持接口参数来传递分页参数，默认false
+  pageSizeZero: false             #pageSize=0 返回所有
+  params: count=countSql
