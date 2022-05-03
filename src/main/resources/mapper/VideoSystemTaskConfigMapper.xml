@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.videomanagementsystem.mapper.VideoSystemTaskConfigMapper">
+  <resultMap id="BaseResultMap" type="com.example.videomanagementsystem.domain.VideoSystemTaskConfig">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="video_system_task_id" jdbcType="INTEGER" property="videoSystemTaskId" />
+    <result column="media_scope" jdbcType="INTEGER" property="mediaScope" />
+    <result column="website_name" jdbcType="VARCHAR" property="websiteName" />
+    <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.example.videomanagementsystem.domain.VideoSystemTaskConfig">
+    <result column="include_arbitrarily_keyword" jdbcType="LONGVARCHAR" property="includeArbitrarilyKeyword" />
+    <result column="include_all_keyword" jdbcType="LONGVARCHAR" property="includeAllKeyword" />
+    <result column="shield_arbitrarily_keyword" jdbcType="LONGVARCHAR" property="shieldArbitrarilyKeyword" />
+    <result column="website_url" jdbcType="LONGVARCHAR" property="websiteUrl" />
+    <result column="blogger_id_str" jdbcType="LONGVARCHAR" property="bloggerIdStr" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, user_id, video_system_task_id, media_scope, website_name, is_delete, create_time, 
+    update_time
+  </sql>
+  <sql id="Blob_Column_List">
+    include_arbitrarily_keyword, include_all_keyword, shield_arbitrarily_keyword, website_url, 
+    blogger_id_str
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.example.videomanagementsystem.domain.VideoSystemTaskConfigExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from video_system_task_config
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.example.videomanagementsystem.domain.VideoSystemTaskConfigExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from video_system_task_config
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from video_system_task_config
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from video_system_task_config
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.videomanagementsystem.domain.VideoSystemTaskConfigExample">
+    delete from video_system_task_config
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <update id="deleteTaskConfig">
+    update video_system_task_config set is_delete = 1 where video_system_task_id = #{taskId}
+  </update>
+  <insert id="insert" parameterType="com.example.videomanagementsystem.domain.VideoSystemTaskConfig">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into video_system_task_config (user_id, video_system_task_id, media_scope, 
+      website_name, is_delete, create_time, 
+      update_time, include_arbitrarily_keyword, 
+      include_all_keyword, shield_arbitrarily_keyword, 
+      website_url, blogger_id_str)
+    values (#{userId,jdbcType=INTEGER}, #{videoSystemTaskId,jdbcType=INTEGER}, #{mediaScope,jdbcType=INTEGER}, 
+      #{websiteName,jdbcType=VARCHAR}, #{isDelete,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{includeArbitrarilyKeyword,jdbcType=LONGVARCHAR}, 
+      #{includeAllKeyword,jdbcType=LONGVARCHAR}, #{shieldArbitrarilyKeyword,jdbcType=LONGVARCHAR}, 
+      #{websiteUrl,jdbcType=LONGVARCHAR}, #{bloggerIdStr,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.videomanagementsystem.domain.VideoSystemTaskConfig">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into video_system_task_config
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="videoSystemTaskId != null">
+        video_system_task_id,
+      </if>
+      <if test="mediaScope != null">
+        media_scope,
+      </if>
+      <if test="websiteName != null">
+        website_name,
+      </if>
+      <if test="isDelete != null">
+        is_delete,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="includeArbitrarilyKeyword != null">
+        include_arbitrarily_keyword,
+      </if>
+      <if test="includeAllKeyword != null">
+        include_all_keyword,
+      </if>
+      <if test="shieldArbitrarilyKeyword != null">
+        shield_arbitrarily_keyword,
+      </if>
+      <if test="websiteUrl != null">
+        website_url,
+      </if>
+      <if test="bloggerIdStr != null">
+        blogger_id_str,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="videoSystemTaskId != null">
+        #{videoSystemTaskId,jdbcType=INTEGER},
+      </if>
+      <if test="mediaScope != null">
+        #{mediaScope,jdbcType=INTEGER},
+      </if>
+      <if test="websiteName != null">
+        #{websiteName,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="includeArbitrarilyKeyword != null">
+        #{includeArbitrarilyKeyword,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="includeAllKeyword != null">
+        #{includeAllKeyword,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="shieldArbitrarilyKeyword != null">
+        #{shieldArbitrarilyKeyword,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="websiteUrl != null">
+        #{websiteUrl,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="bloggerIdStr != null">
+        #{bloggerIdStr,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.videomanagementsystem.domain.VideoSystemTaskConfigExample" resultType="java.lang.Long">
+    select count(*) from video_system_task_config
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+
+  <update id="updateByExampleSelective" parameterType="map">
+    update video_system_task_config
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.videoSystemTaskId != null">
+        video_system_task_id = #{record.videoSystemTaskId,jdbcType=INTEGER},
+      </if>
+      <if test="record.mediaScope != null">
+        media_scope = #{record.mediaScope,jdbcType=INTEGER},
+      </if>
+      <if test="record.websiteName != null">
+        website_name = #{record.websiteName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null">
+        is_delete = #{record.isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.includeArbitrarilyKeyword != null">
+        include_arbitrarily_keyword = #{record.includeArbitrarilyKeyword,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.includeAllKeyword != null">
+        include_all_keyword = #{record.includeAllKeyword,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.shieldArbitrarilyKeyword != null">
+        shield_arbitrarily_keyword = #{record.shieldArbitrarilyKeyword,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.websiteUrl != null">
+        website_url = #{record.websiteUrl,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.bloggerIdStr != null">
+        blogger_id_str = #{record.bloggerIdStr,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update video_system_task_config
+    set id = #{record.id,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      video_system_task_id = #{record.videoSystemTaskId,jdbcType=INTEGER},
+      media_scope = #{record.mediaScope,jdbcType=INTEGER},
+      website_name = #{record.websiteName,jdbcType=VARCHAR},
+      is_delete = #{record.isDelete,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      include_arbitrarily_keyword = #{record.includeArbitrarilyKeyword,jdbcType=LONGVARCHAR},
+      include_all_keyword = #{record.includeAllKeyword,jdbcType=LONGVARCHAR},
+      shield_arbitrarily_keyword = #{record.shieldArbitrarilyKeyword,jdbcType=LONGVARCHAR},
+      website_url = #{record.websiteUrl,jdbcType=LONGVARCHAR},
+      blogger_id_str = #{record.bloggerIdStr,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update video_system_task_config
+    set id = #{record.id,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      video_system_task_id = #{record.videoSystemTaskId,jdbcType=INTEGER},
+      media_scope = #{record.mediaScope,jdbcType=INTEGER},
+      website_name = #{record.websiteName,jdbcType=VARCHAR},
+      is_delete = #{record.isDelete,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.videomanagementsystem.domain.VideoSystemTaskConfig">
+    update video_system_task_config
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="videoSystemTaskId != null">
+        video_system_task_id = #{videoSystemTaskId,jdbcType=INTEGER},
+      </if>
+      <if test="mediaScope != null">
+        media_scope = #{mediaScope,jdbcType=INTEGER},
+      </if>
+      <if test="websiteName != null">
+        website_name = #{websiteName,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="includeArbitrarilyKeyword != null">
+        include_arbitrarily_keyword = #{includeArbitrarilyKeyword,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="includeAllKeyword != null">
+        include_all_keyword = #{includeAllKeyword,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="shieldArbitrarilyKeyword != null">
+        shield_arbitrarily_keyword = #{shieldArbitrarilyKeyword,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="websiteUrl != null">
+        website_url = #{websiteUrl,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="bloggerIdStr != null">
+        blogger_id_str = #{bloggerIdStr,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.example.videomanagementsystem.domain.VideoSystemTaskConfig">
+    update video_system_task_config
+    set user_id = #{userId,jdbcType=INTEGER},
+      video_system_task_id = #{videoSystemTaskId,jdbcType=INTEGER},
+      media_scope = #{mediaScope,jdbcType=INTEGER},
+      website_name = #{websiteName,jdbcType=VARCHAR},
+      is_delete = #{isDelete,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      include_arbitrarily_keyword = #{includeArbitrarilyKeyword,jdbcType=LONGVARCHAR},
+      include_all_keyword = #{includeAllKeyword,jdbcType=LONGVARCHAR},
+      shield_arbitrarily_keyword = #{shieldArbitrarilyKeyword,jdbcType=LONGVARCHAR},
+      website_url = #{websiteUrl,jdbcType=LONGVARCHAR},
+      blogger_id_str = #{bloggerIdStr,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.videomanagementsystem.domain.VideoSystemTaskConfig">
+    update video_system_task_config
+    set user_id = #{userId,jdbcType=INTEGER},
+      video_system_task_id = #{videoSystemTaskId,jdbcType=INTEGER},
+      media_scope = #{mediaScope,jdbcType=INTEGER},
+      website_name = #{websiteName,jdbcType=VARCHAR},
+      is_delete = #{isDelete,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <insert id="createTaskConfig">
+
+    insert into video_system_task_config(user_id, video_system_task_id, media_scope,
+    website_name, is_delete, create_time,
+    update_time, include_arbitrarily_keyword,
+    include_all_keyword, shield_arbitrarily_keyword,
+    website_url, blogger_id_str)
+    values
+    <foreach collection="list" separator="," item="item">
+      (#{item.userId,jdbcType=INTEGER}, #{item.videoSystemTaskId,jdbcType=INTEGER}, #{item.mediaScope,jdbcType=INTEGER},
+      #{item.websiteName,jdbcType=VARCHAR}, #{item.isDelete,jdbcType=INTEGER}, #{item.createTime,jdbcType=TIMESTAMP},
+      #{item.updateTime,jdbcType=TIMESTAMP}, #{item.includeArbitrarilyKeyword,jdbcType=LONGVARCHAR},
+      #{item.includeAllKeyword,jdbcType=LONGVARCHAR}, #{item.shieldArbitrarilyKeyword,jdbcType=LONGVARCHAR},
+      #{item.websiteUrl,jdbcType=LONGVARCHAR}, #{item.bloggerIdStr,jdbcType=LONGVARCHAR})
+    </foreach>
+
+  </insert>
+
+  <select id="getTaskConfigs" resultType="com.example.videomanagementsystem.domain.VideoSystemTaskConfig" resultMap="ResultMapWithBLOBs">
+    select <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from video_system_task_config
+    where video_system_task_id = #{id,jdbcType=INTEGER}
+    <if test="keyword != null and keyword !=''">
+      and (include_arbitrarily_keyword like CONCAT('%',#{keyword},'%')
+      or include_all_keyword like  CONCAT('%',#{keyword},'%') or shield_arbitrarily_keyword like  CONCAT('%',#{keyword},'%'))
+    </if>
+
+  </select>
+</mapper>

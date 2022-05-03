@@ -1,53 +1,455 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.videomanagementsystem.mapper.VideoSystemTaskMapper">
-
-    <sql id="common_task_code">
-        task_name, task_type,gather_video_start_time as gather_start_time,gather_video_end_time as gather_end_time,
-         gather_video_time as gather_time,
-         push_time,gather_type,media_scope,is_proofreading,gather_field, task_open_status
-    </sql>
-    <sql id="common_task_config_code">
-
-    </sql>
-    <update id="deleteTask">
-
-         update video_system_task set is_delete = 1 where id = #{taskId}
-    </update>
-    <update id="updateTaskOpenStatus">
-        update video_system_task set task_open_status = #{code} where id = #{taskId}
-    </update>
-    <update id="deleteTaskConfig">
-        update video_system_task_config set is_delete = 1 where video_system_task_id = #{taskId}
-    </update>
-
-    <insert id="createSystemTask" parameterType="com.example.videomanagementsystem.domain.VideoSystemTask">
-        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
-            SELECT LAST_INSERT_ID()
-        </selectKey>
-     insert into video_system_task(
+  <resultMap id="BaseResultMap" type="com.example.videomanagementsystem.domain.VideoSystemTask">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="task_name" jdbcType="VARCHAR" property="taskName" />
+    <result column="task_type" jdbcType="INTEGER" property="taskType" />
+    <result column="gather_video_start_time" jdbcType="TIMESTAMP" property="gatherVideoStartTime" />
+    <result column="gather_video_end_time" jdbcType="TIMESTAMP" property="gatherVideoEndTime" />
+    <result column="gather_video_time" jdbcType="TIMESTAMP" property="gatherVideoTime" />
+    <result column="push_time" jdbcType="TIMESTAMP" property="pushTime" />
+    <result column="gather_type" jdbcType="INTEGER" property="gatherType" />
+    <result column="is_proofreading" jdbcType="INTEGER" property="isProofreading" />
+    <result column="task_open_status" jdbcType="INTEGER" property="taskOpenStatus" />
+    <result column="task_status" jdbcType="INTEGER" property="taskStatus" />
+    <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.example.videomanagementsystem.domain.VideoSystemTask">
+    <result column="gather_field" jdbcType="LONGVARCHAR" property="gatherField" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, user_id, task_name, task_type, gather_video_start_time, gather_video_end_time, 
+    gather_video_time, push_time, gather_type, is_proofreading, task_open_status, task_status, 
+    is_delete, create_time, update_time
+  </sql>
+  <sql id="Blob_Column_List">
+    gather_field
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.example.videomanagementsystem.domain.VideoSystemTaskExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from video_system_task
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.example.videomanagementsystem.domain.VideoSystemTaskExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from video_system_task
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from video_system_task
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <update id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+   update video_system_task set is_delete = 1
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteByExample" parameterType="com.example.videomanagementsystem.domain.VideoSystemTaskExample">
+    delete from video_system_task
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.videomanagementsystem.domain.VideoSystemTask">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into video_system_task (user_id, task_name, task_type, 
+      gather_video_start_time, gather_video_end_time, 
+      gather_video_time, push_time, gather_type, 
+      is_proofreading, task_open_status, task_status, 
+      is_delete, create_time, update_time, 
+      gather_field)
+    values (#{userId,jdbcType=INTEGER}, #{taskName,jdbcType=VARCHAR}, #{taskType,jdbcType=INTEGER}, 
+      #{gatherVideoStartTime,jdbcType=TIMESTAMP}, #{gatherVideoEndTime,jdbcType=TIMESTAMP},
+      #{gatherVideoTime,jdbcType=TIMESTAMP}, #{pushTime,jdbcType=TIMESTAMP}, #{gatherType,jdbcType=INTEGER},
+      #{isProofreading,jdbcType=INTEGER}, #{taskOpenStatus,jdbcType=INTEGER}, #{taskStatus,jdbcType=INTEGER}, 
+      #{isDelete,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{gatherField,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.videomanagementsystem.domain.VideoSystemTask">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into video_system_task
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
         user_id,
-         task_name, task_type,gather_video_start_time ,gather_video_end_time,
-         gather_video_time,
-         push_time,gather_type,is_proofreading,gather_field, task_open_status,task_status,is_delete
-         ,create_time,update_time
-     )
-    values (#{videoSystemTask.userId},#{videoSystemTask.taskName},#{videoSystemTask.taskType},#{videoSystemTask.gatherStartTime}
-           ,#{videoSystemTask.gatherEndTime},#{videoSystemTask.gatherTime},#{videoSystemTask.pushTime},#{videoSystemTask.gatherType}
-           ,#{videoSystemTask.isProofreading},#{videoSystemTask.gatherField},#{videoSystemTask.taskOpenStatus},#{videoSystemTask.taskStatus},#{videoSystemTask.isDelete}
-           ,#{videoSystemTask.createTime},#{videoSystemTask.updateTime})
-    </insert>
-    <insert id="createTaskConfig">
+      </if>
+      <if test="taskName != null">
+        task_name,
+      </if>
+      <if test="taskType != null">
+        task_type,
+      </if>
+      <if test="gatherVideoStartTime != null">
+        gather_video_start_time,
+      </if>
+      <if test="gatherVideoEndTime != null">
+        gather_video_end_time,
+      </if>
+      <if test="gatherVideoTime != null">
+        gather_video_time,
+      </if>
+      <if test="pushTime != null">
+        push_time,
+      </if>
+      <if test="gatherType != null">
+        gather_type,
+      </if>
+      <if test="isProofreading != null">
+        is_proofreading,
+      </if>
+      <if test="taskOpenStatus != null">
+        task_open_status,
+      </if>
+      <if test="taskStatus != null">
+        task_status,
+      </if>
+      <if test="isDelete != null">
+        is_delete,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="gatherField != null">
+        gather_field,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="taskName != null">
+        #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="taskType != null">
+        #{taskType,jdbcType=INTEGER},
+      </if>
+      <if test="gatherVideoStartTime != null">
+        #{gatherVideoStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gatherVideoEndTime != null">
+        #{gatherVideoEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gatherVideoTime != null">
+        #{gatherVideoTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pushTime != null">
+        #{pushTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gatherType != null">
+        #{gatherType,jdbcType=INTEGER},
+      </if>
+      <if test="isProofreading != null">
+        #{isProofreading,jdbcType=INTEGER},
+      </if>
+      <if test="taskOpenStatus != null">
+        #{taskOpenStatus,jdbcType=INTEGER},
+      </if>
+      <if test="taskStatus != null">
+        #{taskStatus,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gatherField != null">
+        #{gatherField,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.videomanagementsystem.domain.VideoSystemTaskExample" resultType="java.lang.Long">
+    select count(*) from video_system_task
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update video_system_task
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.taskName != null">
+        task_name = #{record.taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taskType != null">
+        task_type = #{record.taskType,jdbcType=INTEGER},
+      </if>
+      <if test="record.gatherVideoStartTime != null">
+        gather_video_start_time = #{record.gatherVideoStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.gatherVideoEndTime != null">
+        gather_video_end_time = #{record.gatherVideoEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.gatherVideoTime != null">
+        gather_video_time = #{record.gatherVideoTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.pushTime != null">
+        push_time = #{record.pushTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.gatherType != null">
+        gather_type = #{record.gatherType,jdbcType=INTEGER},
+      </if>
+      <if test="record.isProofreading != null">
+        is_proofreading = #{record.isProofreading,jdbcType=INTEGER},
+      </if>
+      <if test="record.taskOpenStatus != null">
+        task_open_status = #{record.taskOpenStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.taskStatus != null">
+        task_status = #{record.taskStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.isDelete != null">
+        is_delete = #{record.isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.gatherField != null">
+        gather_field = #{record.gatherField,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update video_system_task
+    set id = #{record.id,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      task_name = #{record.taskName,jdbcType=VARCHAR},
+      task_type = #{record.taskType,jdbcType=INTEGER},
+      gather_video_start_time = #{record.gatherVideoStartTime,jdbcType=TIMESTAMP},
+      gather_video_end_time = #{record.gatherVideoEndTime,jdbcType=TIMESTAMP},
+      gather_video_time = #{record.gatherVideoTime,jdbcType=TIMESTAMP},
+      push_time = #{record.pushTime,jdbcType=TIMESTAMP},
+      gather_type = #{record.gatherType,jdbcType=INTEGER},
+      is_proofreading = #{record.isProofreading,jdbcType=INTEGER},
+      task_open_status = #{record.taskOpenStatus,jdbcType=INTEGER},
+      task_status = #{record.taskStatus,jdbcType=INTEGER},
+      is_delete = #{record.isDelete,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      gather_field = #{record.gatherField,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update video_system_task
+    set id = #{record.id,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      task_name = #{record.taskName,jdbcType=VARCHAR},
+      task_type = #{record.taskType,jdbcType=INTEGER},
+      gather_video_start_time = #{record.gatherVideoStartTime,jdbcType=TIMESTAMP},
+      gather_video_end_time = #{record.gatherVideoEndTime,jdbcType=TIMESTAMP},
+      gather_video_time = #{record.gatherVideoTime,jdbcType=TIMESTAMP},
+      push_time = #{record.pushTime,jdbcType=TIMESTAMP},
+      gather_type = #{record.gatherType,jdbcType=INTEGER},
+      is_proofreading = #{record.isProofreading,jdbcType=INTEGER},
+      task_open_status = #{record.taskOpenStatus,jdbcType=INTEGER},
+      task_status = #{record.taskStatus,jdbcType=INTEGER},
+      is_delete = #{record.isDelete,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.videomanagementsystem.domain.VideoSystemTask">
+    update video_system_task
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="taskName != null">
+        task_name = #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="taskType != null">
+        task_type = #{taskType,jdbcType=INTEGER},
+      </if>
+      <if test="gatherVideoStartTime != null">
+        gather_video_start_time = #{gatherVideoStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gatherVideoEndTime != null">
+        gather_video_end_time = #{gatherVideoEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gatherVideoTime != null">
+        gather_video_time = #{gatherVideoTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pushTime != null">
+        push_time = #{pushTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gatherType != null">
+        gather_type = #{gatherType,jdbcType=INTEGER},
+      </if>
+      <if test="isProofreading != null">
+        is_proofreading = #{isProofreading,jdbcType=INTEGER},
+      </if>
+      <if test="taskOpenStatus != null">
+        task_open_status = #{taskOpenStatus,jdbcType=INTEGER},
+      </if>
+      <if test="taskStatus != null">
+        task_status = #{taskStatus,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gatherField != null">
+        gather_field = #{gatherField,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.example.videomanagementsystem.domain.VideoSystemTask">
+    update video_system_task
+    set user_id = #{userId,jdbcType=INTEGER},
+      task_name = #{taskName,jdbcType=VARCHAR},
+      task_type = #{taskType,jdbcType=INTEGER},
+      gather_video_start_time = #{gatherVideoStartTime,jdbcType=TIMESTAMP},
+      gather_video_end_time = #{gatherVideoEndTime,jdbcType=TIMESTAMP},
+      gather_video_time = #{gatherVideoTime,jdbcType=TIMESTAMP},
+      push_time = #{pushTime,jdbcType=TIMESTAMP},
+      gather_type = #{gatherType,jdbcType=INTEGER},
+      is_proofreading = #{isProofreading,jdbcType=INTEGER},
+      task_open_status = #{taskOpenStatus,jdbcType=INTEGER},
+      task_status = #{taskStatus,jdbcType=INTEGER},
+      is_delete = #{isDelete,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      gather_field = #{gatherField,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.videomanagementsystem.domain.VideoSystemTask">
+    update video_system_task
+    set user_id = #{userId,jdbcType=INTEGER},
+      task_name = #{taskName,jdbcType=VARCHAR},
+      task_type = #{taskType,jdbcType=INTEGER},
+      gather_video_start_time = #{gatherVideoStartTime,jdbcType=TIMESTAMP},
+      gather_video_end_time = #{gatherVideoEndTime,jdbcType=TIMESTAMP},
+      gather_video_time = #{gatherVideoTime,jdbcType=TIMESTAMP},
+      push_time = #{pushTime,jdbcType=TIMESTAMP},
+      gather_type = #{gatherType,jdbcType=INTEGER},
+      is_proofreading = #{isProofreading,jdbcType=INTEGER},
+      task_open_status = #{taskOpenStatus,jdbcType=INTEGER},
+      task_status = #{taskStatus,jdbcType=INTEGER},
+      is_delete = #{isDelete,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateTaskOpenStatus">
+    update video_system_task set task_open_status = #{code} where id = #{taskId}
 
-        insert into video_system_task_config(user_id,video_system_task_id,media_scope,include_arbitrarily_keyword,include_all_keyword,
-                                             shield_arbitrarily_keyword,website_name,website_url,blogger_id_str,
-                                             is_delete,create_time,update_time)
-          values
-        <foreach collection="list" separator="," item="item">
-            (#{item.userId},#{item.videoSystemTaskId},#{item.mediaScope},#{item.includeArbitrarilyKw},#{item.includeAllKw},#{item.shieldArbitrarilyKw}
-            ,#{item.websiteName},#{item.websiteUrl},#{item.bloggerIdStr},#{item.idDelete},#{item.createTime},#{item.updateTime})
-        </foreach>
+  </update>
 
-    </insert>
+
 
 </mapper>

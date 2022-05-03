@@ -1,6 +1,9 @@
 package com.example.videomanagementsystem.service;
 
+import com.example.videomanagementsystem.domain.TaskQueryParam;
 import com.example.videomanagementsystem.domain.VideoSystemTaskReqParam;
+
+import java.util.List;
 
 /**
  * 系统任务service
@@ -13,14 +16,14 @@ public interface VideoSystemTaskService {
      * @param taskId 任务id
      * @return int
      */
-    void deleteTask(Long taskId);
+    void deleteTask(Integer taskId);
 
     /**
      * 开启某个任务
      *
      * @param taskId 任务id
      */
-    void openTask(Long taskId);
+    void openTask(Integer taskId);
 
     /**
      * 创建任务
@@ -29,5 +32,7 @@ public interface VideoSystemTaskService {
      */
     void createTask(VideoSystemTaskReqParam entity);
 
-    VideoSystemTaskReqParam getTaskInfo(Long taskId);
+    VideoSystemTaskReqParam getTaskInfo(Integer taskId);
+
+    List<VideoSystemTaskReqParam> getTaskInfoList(TaskQueryParam taskQueryParam);
 }

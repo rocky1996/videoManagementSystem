@@ -52,5 +52,11 @@
         <table tableName="video_system_feedback" domainObjectName="VideoSystemFeedback">
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
+        <table tableName="video_system_task" domainObjectName="VideoSystemTask">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="video_system_task_config" domainObjectName="VideoSystemTaskConfig">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
     </context>
 </generatorConfiguration>

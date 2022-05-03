@@ -3,65 +3,51 @@ package com.example.videomanagementsystem.domain;
 import java.util.Date;
 
 public class VideoSystemTask {
+    private Integer id;
 
+    private Integer userId;
 
-    /**
-     * 主键id
-     */
-    private Long id;
-    //用户id
-    private Long userId;
-    //任务名称
     private String taskName;
-    //0:日更任务,1:一次性任务
-    private Long taskType;
-    //采集视频开始时间
-    private Date gatherStartTime;
-    //采集视频结束时间
-    private Date gatherEndTime;
-    //采集视频时间
-    private Date gatherTime;
-    //推送时间
+
+    private Integer taskType;
+
+    private Date gatherVideoStartTime;
+
+    private Date gatherVideoEndTime;
+
+    private Date gatherVideoTime;
+
     private Date pushTime;
 
-    //0:关键字采集,1:定源采集,2:关键字+定源采集
     private Integer gatherType;
-    //是否需要校审,0:是,1:否
-    private Long isProofreading;
-    //该用户的采集权限,可以为空,例如1,2,3,4,  以逗号隔开
-    private String gatherField;
-    //0:开启,1:关闭
+
+    private Integer isProofreading;
+
     private Integer taskOpenStatus;
-    //逻辑删除,0:未删除,1:已删除
-    private  Integer isDelete;
-    //创建时间
-    private Date createTime;
-    //更新时间
-    private Date updateTime;
 
     private Integer taskStatus;
 
-    public Integer getTaskStatus() {
-        return taskStatus;
-    }
+    private Integer isDelete;
 
-    public void setTaskStatus(Integer taskStatus) {
-        this.taskStatus = taskStatus;
-    }
+    private Date createTime;
 
-    public Long getId() {
+    private Date updateTime;
+
+    private String gatherField;
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Long getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
@@ -73,36 +59,36 @@ public class VideoSystemTask {
         this.taskName = taskName;
     }
 
-    public Long getTaskType() {
+    public Integer getTaskType() {
         return taskType;
     }
 
-    public void setTaskType(Long taskType) {
+    public void setTaskType(Integer taskType) {
         this.taskType = taskType;
     }
 
-    public Date getGatherStartTime() {
-        return gatherStartTime;
+    public Date getGatherVideoStartTime() {
+        return gatherVideoStartTime;
     }
 
-    public void setGatherStartTime(Date gatherStartTime) {
-        this.gatherStartTime = gatherStartTime;
+    public void setGatherVideoStartTime(Date gatherVideoStartTime) {
+        this.gatherVideoStartTime = gatherVideoStartTime;
     }
 
-    public Date getGatherEndTime() {
-        return gatherEndTime;
+    public Date getGatherVideoEndTime() {
+        return gatherVideoEndTime;
     }
 
-    public void setGatherEndTime(Date gatherEndTime) {
-        this.gatherEndTime = gatherEndTime;
+    public void setGatherVideoEndTime(Date gatherVideoEndTime) {
+        this.gatherVideoEndTime = gatherVideoEndTime;
     }
 
-    public Date getGatherTime() {
-        return gatherTime;
+    public Date getGatherVideoTime() {
+        return gatherVideoTime;
     }
 
-    public void setGatherTime(Date gatherTime) {
-        this.gatherTime = gatherTime;
+    public void setGatherVideoTime(Date gatherVideoTime) {
+        this.gatherVideoTime = gatherVideoTime;
     }
 
     public Date getPushTime() {
@@ -121,20 +107,12 @@ public class VideoSystemTask {
         this.gatherType = gatherType;
     }
 
-    public Long getIsProofreading() {
+    public Integer getIsProofreading() {
         return isProofreading;
     }
 
-    public void setIsProofreading(Long isProofreading) {
+    public void setIsProofreading(Integer isProofreading) {
         this.isProofreading = isProofreading;
-    }
-
-    public String getGatherField() {
-        return gatherField;
-    }
-
-    public void setGatherField(String gatherField) {
-        this.gatherField = gatherField;
     }
 
     public Integer getTaskOpenStatus() {
@@ -143,6 +121,14 @@ public class VideoSystemTask {
 
     public void setTaskOpenStatus(Integer taskOpenStatus) {
         this.taskOpenStatus = taskOpenStatus;
+    }
+
+    public Integer getTaskStatus() {
+        return taskStatus;
+    }
+
+    public void setTaskStatus(Integer taskStatus) {
+        this.taskStatus = taskStatus;
     }
 
     public Integer getIsDelete() {
@@ -167,5 +153,39 @@ public class VideoSystemTask {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getGatherField() {
+        return gatherField;
+    }
+
+    public void setGatherField(String gatherField) {
+        this.gatherField = gatherField;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", userId=").append(userId);
+        sb.append(", taskName=").append(taskName);
+        sb.append(", taskType=").append(taskType);
+        sb.append(", gatherVideoStartTime=").append(gatherVideoStartTime);
+        sb.append(", gatherVideoEndTime=").append(gatherVideoEndTime);
+        sb.append(", gatherVideoTime=").append(gatherVideoTime);
+        sb.append(", pushTime=").append(pushTime);
+        sb.append(", gatherType=").append(gatherType);
+        sb.append(", isProofreading=").append(isProofreading);
+        sb.append(", taskOpenStatus=").append(taskOpenStatus);
+        sb.append(", taskStatus=").append(taskStatus);
+        sb.append(", isDelete=").append(isDelete);
+        sb.append(", createTime=").append(createTime);
+        sb.append(", updateTime=").append(updateTime);
+        sb.append(", gatherField=").append(gatherField);
+        sb.append("]");
+        return sb.toString();
     }
 }
