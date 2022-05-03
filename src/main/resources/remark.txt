@@ -2,8 +2,6 @@
     https://console-docs.apipost.cn/preview/3b677b4073aaae92/1492df02fe6dda62
 github地址:
     https://github.com/rocky1996/videoManagementSystem
-user:
-    wujinfan
 
 
 
