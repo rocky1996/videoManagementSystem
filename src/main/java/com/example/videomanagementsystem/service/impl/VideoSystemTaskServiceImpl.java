@@ -6,6 +6,7 @@ import com.example.videomanagementsystem.mapper.VideoSystemTaskConfigMapper;
 import com.example.videomanagementsystem.mapper.VideoSystemTaskMapper;
 import com.example.videomanagementsystem.service.VideoSystemTaskService;
 import com.example.videomanagementsystem.util.DateUtils;
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
@@ -157,7 +158,7 @@ public class VideoSystemTaskServiceImpl implements VideoSystemTaskService {
 
     @Override
     public List<VideoSystemTaskReqParam> getTaskInfoList(TaskQueryParam taskQueryParam) {
-        List<VideoSystemTaskReqParam> result = Lists.newArrayList();
+        Page<VideoSystemTaskReqParam> result = new Page<>();
         try {
             VideoSystemTaskExample example = new VideoSystemTaskExample();
             VideoSystemTaskExample.Criteria criteria = example.createCriteria();
@@ -173,7 +174,9 @@ public class VideoSystemTaskServiceImpl implements VideoSystemTaskService {
             criteria.andIsDeleteEqualTo(IsDeleteEnum.NOT_DELETE.getCode());
             PageHelper.offsetPage(taskQueryParam.getOffset(), taskQueryParam.getSize());
             PageHelper.orderBy("id desc");
-            List<VideoSystemTask> videoSystemTasks = videoSystemTaskMapper.selectByExampleWithBLOBs(example);
+            Page<VideoSystemTask> videoSystemTasks = (Page<VideoSystemTask>) videoSystemTaskMapper.selectByExampleWithBLOBs(example);
+            result = new Page<>(videoSystemTasks.getPageNum(), videoSystemTasks.getPageSize(), true);
+            result.setTotal(videoSystemTasks.getTotal());
 
 
             for (VideoSystemTask videoSystemTask : videoSystemTasks) {
