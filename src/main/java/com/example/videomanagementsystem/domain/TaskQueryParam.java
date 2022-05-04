@@ -12,6 +12,7 @@ public class TaskQueryParam {
     private Integer taskType;
 
     private Integer status;
+    private Integer userId;
     private int offset;
 
     private int size;

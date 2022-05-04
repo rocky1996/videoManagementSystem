@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.Range;
 @Data
 public class TaskQueryParamReq {
 
+    private Integer userId;
     private String taskName;
 
     private String keyword;
@@ -14,7 +15,6 @@ public class TaskQueryParamReq {
     private Integer status;
     @Range(min = 1)
     private int pageNum = 1;
-
     @Range(min = 1, max = 1000)
     private int pageSize = 10;
 
@@ -24,6 +24,7 @@ public class TaskQueryParamReq {
         param.setTaskType(taskType);
         param.setStatus(status);
         param.setKeyword(keyword);
+        param.setUserId(userId);
         param.setOffset((pageNum - 1) * pageSize);
         param.setSize(pageSize);
         return param;
