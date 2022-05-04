@@ -23,5 +23,9 @@ public interface UserDao {
 
     void updateUser(int userId, @NotBlank String password);
 
+    void updateStatusByRoleId(int status, int roleId);
+
     void deleteUser(int userId);
+
+    List<VideoSystemUser> selectUsers(int roleId);
 }

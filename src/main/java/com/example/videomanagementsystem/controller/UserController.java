@@ -38,8 +38,8 @@ public class UserController {
     @Autowired
     private UserRoleService userRoleService;
 
-    @GetMapping("/searchUserList")
-    public RestResult<PageResult<UserResp>> getUsers(@Valid UserQueryReq req) {
+    @PostMapping("/searchUserList")
+    public RestResult<PageResult<UserResp>> getUsers(@RequestBody @Valid UserQueryReq req) {
         List<VideoSystemUser> users = userDao.selectUsers(req.convert());
         PageInfo<VideoSystemUser> pageInfo = new PageInfo<>(users);
         List<Integer> roleIds = users.stream().map(VideoSystemUser::getRoleId).distinct().collect(Collectors.toList());
