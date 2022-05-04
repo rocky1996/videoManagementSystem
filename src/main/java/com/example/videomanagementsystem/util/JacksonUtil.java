@@ -1,9 +1,7 @@
 package com.example.videomanagementsystem.util;
 
+import cn.hutool.core.lang.TypeReference;
 import cn.hutool.json.JSONUtil;
-import com.google.common.collect.ImmutableMap;
-
-import java.util.Map;
 
 public class JacksonUtil {
 
@@ -25,6 +23,17 @@ public class JacksonUtil {
      */
     public static <T> T strToBean(String str, Class<T> bClass){
         return JSONUtil.toBean(str, bClass);
+    }
+
+    /**
+     * jsonStr -> 对象
+     * @param str
+     * @param tTypeReference
+     * @return
+     * @param <T>
+     */
+    public static <T> T strToBean(String str, TypeReference<T> tTypeReference){
+        return JSONUtil.toBean(str, tTypeReference, true);
     }
 
 //    public static void main(String[] args) {
