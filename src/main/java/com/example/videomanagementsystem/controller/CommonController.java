@@ -1,24 +1,59 @@
 package com.example.videomanagementsystem.controller;
 
 import com.example.videomanagementsystem.constants.RestResult;
-import com.example.videomanagementsystem.controller.resp.MediaScopeResp;
-import com.example.videomanagementsystem.enums.MediaSourceEnum;
-import com.example.videomanagementsystem.enums.RestEnum;
+import com.example.videomanagementsystem.controller.resp.*;
+import com.example.videomanagementsystem.enums.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.LinkedList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
-@RestController("/videoSystem/common")
+@Slf4j
+@RestController
+@RequestMapping("/videoSystem/common")
 public class CommonController {
+
+    @GetMapping("/getMenuList")
+    public RestResult<List<RoleMenuResp>> getRoleMenus() {
+        List<RoleMenuResp> roleMenuRespList = Arrays.stream(FirstMenuEnum.values())
+                .map(menu -> new RoleMenuResp(menu.getCode(), menu.getName(),
+                        menu.getSecondMenuEnumList().stream()
+                                .map(secondMenu -> new RoleMenuResp.SecondMenu(secondMenu.getCode(), secondMenu.getName()))
+                                .collect(Collectors.toList()))
+                ).collect(Collectors.toList());
+        return new RestResult<>(RestEnum.SUCCESS.getCode(), RestEnum.SUCCESS.getMsg(), roleMenuRespList);
+    }
 
     @GetMapping("/getTaskMediaScopeList")
     public RestResult<List<MediaScopeResp>> getTaskMediaScopeList() {
-        List<MediaScopeResp> mediaScopeRespList = new LinkedList<>();
-        for (MediaSourceEnum sourceEnum : MediaSourceEnum.values()) {
-            mediaScopeRespList.add(new MediaScopeResp().setMediaId(sourceEnum.getCode()).setMediaName(sourceEnum.getName()));
-        }
-        return new RestResult(RestEnum.SUCCESS, mediaScopeRespList);
+        return new RestResult<>(RestEnum.SUCCESS, Arrays.stream(MediaSourceEnum.values()).map(e -> new MediaScopeResp().setMediaId(e.getCode()).setMediaName(e.getName())).collect(Collectors.toList()));
+    }
+    @GetMapping("/getTaskTypeList")
+    public RestResult<List<TaskTypeResp>> getTaskTypeList() {
+        return new RestResult<>(RestEnum.SUCCESS, Arrays.stream(TaskTypeEnum.values()).map(e -> new TaskTypeResp().setTaskTypeId(e.getCode()).setTaskTypeName(e.getName())).collect(Collectors.toList()));
+    }
+
+    @GetMapping("/getTaskGatherList")
+    public RestResult<List<TaskGatherResp>> getTaskGatherList() {
+        return new RestResult<>(RestEnum.SUCCESS, Arrays.stream(CollectionModeEnum.values()).map(e -> new TaskGatherResp().setTaskGatherTypeId(e.getCode()).setTaskGatherTypeName(e.getName())).collect(Collectors.toList()));
+    }
+
+    @GetMapping("/getGatherFieldList")
+    public RestResult<List<GatherFieldResp>> getGatherFieldList() {
+        return new RestResult<>(RestEnum.SUCCESS, Arrays.stream(GatherFieldEnum.values()).map(e -> new GatherFieldResp().setGatherFieldId(e.getCode()).setGatherFieldName(e.getName())).collect(Collectors.toList()));
+    }
+
+    @GetMapping("/getStatusList")
+    public RestResult<List<StatusResp>> getStatusList() {
+        return new RestResult<>(RestEnum.SUCCESS, Arrays.stream(StatusEnum.values()).map(e -> new StatusResp().setStatusIs(e.getCode()).setStatusName(e.getName())).collect(Collectors.toList()));
+    }
+
+    @GetMapping("/getTaskStatusList")
+    public RestResult<List<TaskStatusResp>> getTaskStatusList() {
+        return new RestResult<>(RestEnum.SUCCESS, Arrays.stream(TaskStatusEnum.values()).map(e -> new TaskStatusResp().setTaskStatusIs(e.getCode()).setTaskStatusName(e.getName())).collect(Collectors.toList()));
     }
 }

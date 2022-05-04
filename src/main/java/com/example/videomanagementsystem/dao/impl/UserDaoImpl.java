@@ -101,11 +101,32 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public void updateStatusByRoleId(int status, int roleId) {
+        VideoSystemUser updateUser = new VideoSystemUser();
+        updateUser.setUserStatus(status);
+        updateUser.setUpdateTime(new Date());
+        VideoSystemUserExample example = new VideoSystemUserExample();
+        example.createCriteria()
+                .andRoleIdEqualTo(roleId)
+                .andIsDeleteEqualTo(IsDeleteEnum.NOT_DELETE.getCode());
+        videoSystemUserMapper.updateByExampleSelective(updateUser, example);
+    }
+
+    @Override
     public void deleteUser(int userId) {
         VideoSystemUser deleteUser = new VideoSystemUser();
         deleteUser.setId(userId);
         deleteUser.setIsDelete(IsDeleteEnum.DELETED.getCode());
         deleteUser.setUpdateTime(new Date());
         videoSystemUserMapper.updateByPrimaryKeySelective(deleteUser);
+    }
+
+    @Override
+    public List<VideoSystemUser> selectUsers(int roleId) {
+        VideoSystemUserExample example = new VideoSystemUserExample();
+        example.createCriteria()
+                .andRoleIdEqualTo(roleId)
+                .andIsDeleteEqualTo(IsDeleteEnum.NOT_DELETE.getCode());
+        return videoSystemUserMapper.selectByExampleWithBLOBs(example);
     }
 }
