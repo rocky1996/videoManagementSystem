@@ -2,6 +2,7 @@ package com.example.videomanagementsystem.controller;
 
 import com.example.videomanagementsystem.constants.PageResult;
 import com.example.videomanagementsystem.constants.RestResult;
+import com.example.videomanagementsystem.controller.auth.Menu;
 import com.example.videomanagementsystem.controller.req.RoleQueryReq;
 import com.example.videomanagementsystem.controller.req.RoleReq;
 import com.example.videomanagementsystem.controller.resp.RoleMenuResp;
@@ -44,6 +45,7 @@ public class RoleController {
                             !FirstMenuEnum.getFirstMenuEnum(menu.getFirstMenuId()).getSecondMenuEnumList().contains(SecondMenuEnum.getSecondMenuEnum(secondMenu.getSecondMenuId()))));
 
     @PostMapping("/searchRoleList")
+    @Menu(firstMenu = FirstMenuEnum.SYSTEM_MANAGEMENT, secondMenu = SecondMenuEnum.ROLE_MANAGEMENT)
     public RestResult<PageResult<RoleResp>> getRoles(@RequestBody @Valid RoleQueryReq req) {
         List<VideoSystemRole> roles = userRoleDao.selectRoles(req.convert());
         PageInfo<VideoSystemRole> pageInfo = new PageInfo<>(roles);
@@ -56,6 +58,7 @@ public class RoleController {
     }
 
     @GetMapping("/getRoleList")
+    @Menu(firstMenu = FirstMenuEnum.SYSTEM_MANAGEMENT, secondMenu = SecondMenuEnum.ROLE_MANAGEMENT)
     public RestResult<List<RoleResp>> getOpenEffectiveRoles() {
         List<RoleResp> roleRespList = userRoleDao.selectOpenEffectiveRoles().stream()
                 .map(RoleResp::convert)
@@ -64,6 +67,7 @@ public class RoleController {
     }
 
     @PostMapping("/createOrUpdateMenu")
+    @Menu(firstMenu = FirstMenuEnum.SYSTEM_MANAGEMENT, secondMenu = SecondMenuEnum.ROLE_MANAGEMENT)
     public RestResult<Void> createOrUpdateRole(@RequestBody @Valid RoleReq req) {
         //创建
         if (req.getRoleId() == null) {
@@ -98,6 +102,7 @@ public class RoleController {
     }
 
     @GetMapping("/deleteRole/{id}")
+    @Menu(firstMenu = FirstMenuEnum.SYSTEM_MANAGEMENT, secondMenu = SecondMenuEnum.ROLE_MANAGEMENT)
     public RestResult<Void> deleteRole(@PathVariable int id) {
         try {
             userRoleService.deleteRole(id);
@@ -108,6 +113,7 @@ public class RoleController {
     }
 
     @GetMapping("/getRoleMenuList/{id}")
+    @Menu(firstMenu = FirstMenuEnum.SYSTEM_MANAGEMENT, secondMenu = SecondMenuEnum.ROLE_MANAGEMENT)
     public RestResult<List<RoleMenuResp>> getRoleMenus(@PathVariable int id) {
         VideoSystemRole role = userRoleService.getRole(id);
         if (role == null) {

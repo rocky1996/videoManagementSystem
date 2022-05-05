@@ -2,6 +2,10 @@ package com.example.videomanagementsystem.controller;
 
 import com.example.videomanagementsystem.constants.PageResult;
 import com.example.videomanagementsystem.constants.RestResult;
+import com.example.videomanagementsystem.controller.auth.Auth;
+import com.example.videomanagementsystem.controller.auth.JwtUtils;
+import com.example.videomanagementsystem.controller.auth.Menu;
+import com.example.videomanagementsystem.controller.auth.UserInfo;
 import com.example.videomanagementsystem.controller.req.UserLoginReq;
 import com.example.videomanagementsystem.controller.req.UserPasswordResetReq;
 import com.example.videomanagementsystem.controller.req.UserQueryReq;
@@ -10,7 +14,9 @@ import com.example.videomanagementsystem.controller.resp.UserResp;
 import com.example.videomanagementsystem.dao.UserDao;
 import com.example.videomanagementsystem.domain.VideoSystemRole;
 import com.example.videomanagementsystem.domain.VideoSystemUser;
+import com.example.videomanagementsystem.enums.FirstMenuEnum;
 import com.example.videomanagementsystem.enums.RestEnum;
+import com.example.videomanagementsystem.enums.SecondMenuEnum;
 import com.example.videomanagementsystem.enums.StatusEnum;
 import com.example.videomanagementsystem.service.UserRoleService;
 import com.example.videomanagementsystem.service.UserService;
@@ -19,6 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
@@ -39,6 +46,7 @@ public class UserController {
     private UserRoleService userRoleService;
 
     @PostMapping("/searchUserList")
+    @Menu(firstMenu = FirstMenuEnum.SYSTEM_MANAGEMENT, secondMenu = SecondMenuEnum.USER_MANAGEMENT)
     public RestResult<PageResult<UserResp>> getUsers(@RequestBody @Valid UserQueryReq req) {
         List<VideoSystemUser> users = userDao.selectUsers(req.convert());
         PageInfo<VideoSystemUser> pageInfo = new PageInfo<>(users);
@@ -52,12 +60,19 @@ public class UserController {
         return new RestResult<>(RestEnum.SUCCESS.getCode(), RestEnum.SUCCESS.getMsg(), pageResult);
     }
 
+    @Auth(required = false)
     @PostMapping("/loginUser")
-    public RestResult<UserResp> login(@RequestBody @Valid UserLoginReq req) {
+    public RestResult<UserResp> login(HttpServletRequest httpServletRequest,
+                                      @RequestBody @Valid UserLoginReq req) {
         try {
             VideoSystemUser user = userService.login(req.getUsername(), req.getPassword());
             VideoSystemRole role = userRoleService.getRole(user.getRoleId());
             UserResp userResp = UserResp.convert(user, role);
+
+            //生成token
+            UserInfo userInfo = UserInfo.builder().userId(user.getId()).build();
+            String token = JwtUtils.getRS256Token(userInfo);
+            httpServletRequest.getSession().setAttribute("token", token);
             return new RestResult<>(RestEnum.SUCCESS.getCode(), RestEnum.SUCCESS.getMsg(), userResp);
         } catch (Exception e) {
             return new RestResult<>(RestEnum.FAILED.getCode(), e.getMessage(), null);
@@ -65,6 +80,7 @@ public class UserController {
     }
 
     @PostMapping("/createOrUpdateUser")
+    @Menu(firstMenu = FirstMenuEnum.SYSTEM_MANAGEMENT, secondMenu = SecondMenuEnum.USER_MANAGEMENT)
     public RestResult<Void> createOrUpdateUser(@RequestBody @Valid UserReq req) {
         //创建
         if (req.getUserId() == null) {
@@ -102,6 +118,7 @@ public class UserController {
     }
 
     @GetMapping("/deleteUser/{id}")
+    @Menu(firstMenu = FirstMenuEnum.SYSTEM_MANAGEMENT, secondMenu = SecondMenuEnum.USER_MANAGEMENT)
     public RestResult<Void> deleteUser(@PathVariable int id) {
         try {
             userService.deleteUser(id);

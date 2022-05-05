@@ -3,19 +3,17 @@ package com.example.videomanagementsystem.controller;
 
 import com.example.videomanagementsystem.constants.PageResult;
 import com.example.videomanagementsystem.constants.RestResult;
-import com.example.videomanagementsystem.controller.resp.UserResp;
+import com.example.videomanagementsystem.controller.auth.Menu;
 import com.example.videomanagementsystem.domain.*;
+import com.example.videomanagementsystem.enums.FirstMenuEnum;
 import com.example.videomanagementsystem.enums.RestEnum;
 import com.example.videomanagementsystem.service.VideoSystemTaskService;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * 任务controller
@@ -34,6 +32,7 @@ public class TaskController {
      * @return RestResult
      */
     @PostMapping("createTask")
+    @Menu(firstMenu = FirstMenuEnum.TASK_DISTRIBUTION)
     public RestResult<Void> createTask(@RequestBody VideoSystemTaskReqParam entity) {
         try {
             videoSystemTaskService.createTask(entity);
@@ -51,6 +50,7 @@ public class TaskController {
      * @return RestResult
      */
     @GetMapping("deleteTask/{taskId}")
+    @Menu(firstMenu = FirstMenuEnum.TASK_DISTRIBUTION)
     public RestResult<Void> deleteTask(@PathVariable("taskId") Integer taskId) {
         try {
             videoSystemTaskService.deleteTask(taskId);
@@ -70,6 +70,7 @@ public class TaskController {
      * @return RestResult
      */
     @GetMapping("openTask/{taskId}")
+    @Menu(firstMenu = FirstMenuEnum.TASK_DISTRIBUTION)
     public RestResult<Void> openTask(@PathVariable("taskId") Integer taskId) {
         try {
             videoSystemTaskService.openTask(taskId);
@@ -87,6 +88,7 @@ public class TaskController {
      * @return RestResult
      */
     @GetMapping("getTaskInfo/{taskId}")
+    @Menu(firstMenu = FirstMenuEnum.TASK_DISTRIBUTION)
     public RestResult<VideoSystemTaskReqParam> getTaskInfo(@PathVariable("taskId") Integer taskId) {
         VideoSystemTaskReqParam taskInfo = null;
         try {
@@ -99,6 +101,7 @@ public class TaskController {
     }
 
     @PostMapping("getTaskInfoList")
+    @Menu(firstMenu = FirstMenuEnum.TASK_DISTRIBUTION)
     public RestResult<PageResult<VideoSystemTaskReqParam>> getTaskInfoList(@RequestBody TaskQueryParamReq taskQueryParam) {
         try {
             List<VideoSystemTaskReqParam> list = videoSystemTaskService.getTaskInfoList(taskQueryParam.convert());

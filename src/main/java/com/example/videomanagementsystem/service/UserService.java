@@ -2,6 +2,9 @@ package com.example.videomanagementsystem.service;
 
 import com.example.videomanagementsystem.domain.VideoSystemUser;
 
+import java.util.List;
+import java.util.Map;
+
 public interface UserService {
 
     VideoSystemUser login(String userName, String password);
@@ -13,4 +16,6 @@ public interface UserService {
     void deleteUser(int userId);
 
     void updateUserPassword(int userId, String newPassword);
+
+    Map<Integer, List<Integer>> getUserRoleMenus(int userId);
 }
