@@ -38,7 +38,7 @@ public class TaskController {
             videoSystemTaskService.createTask(entity);
 
         } catch (Exception e) {
-            return new RestResult<>(RestEnum.FAILED.getCode(), "创建任务失败");
+            return new RestResult<>(RestEnum.FAILED.getCode(), " 创建任务失败 !");
         }
         return new RestResult<>(RestEnum.SUCCESS.getCode(), RestEnum.SUCCESS.getMsg());
     }
@@ -57,7 +57,7 @@ public class TaskController {
 
         } catch (Exception e) {
 
-            return new RestResult<>(RestEnum.FAILED.getCode(), "删除任务失败");
+            return new RestResult<>(RestEnum.FAILED.getCode(), "删除任务 失败");
         }
         return new RestResult<>(RestEnum.SUCCESS.getCode(), RestEnum.SUCCESS.getMsg());
 

@@ -159,6 +159,7 @@ public class VideoSystemTaskServiceImpl implements VideoSystemTaskService {
     @Override
     public List<VideoSystemTaskReqParam> getTaskInfoList(TaskQueryParam taskQueryParam) {
         Page<VideoSystemTaskReqParam> result = new Page<>();
+        List<Integer> taskIds = Lists.newArrayList();
         try {
             VideoSystemTaskExample example = new VideoSystemTaskExample();
             VideoSystemTaskExample.Criteria criteria = example.createCriteria();
@@ -171,24 +172,34 @@ public class VideoSystemTaskServiceImpl implements VideoSystemTaskService {
             if (taskQueryParam.getStatus() != null) {
                 criteria.andTaskStatusEqualTo(taskQueryParam.getStatus());
             }
+            if (taskQueryParam.getUserId() != null) {
+                criteria.andUserIdEqualTo(taskQueryParam.getUserId());
+            }
             criteria.andIsDeleteEqualTo(IsDeleteEnum.NOT_DELETE.getCode());
             PageHelper.offsetPage(taskQueryParam.getOffset(), taskQueryParam.getSize());
             PageHelper.orderBy("id desc");
             Page<VideoSystemTask> videoSystemTasks = (Page<VideoSystemTask>) videoSystemTaskMapper.selectByExampleWithBLOBs(example);
             result = new Page<>(videoSystemTasks.getPageNum(), videoSystemTasks.getPageSize(), true);
-            result.setTotal(videoSystemTasks.getTotal());
-
-
             for (VideoSystemTask videoSystemTask : videoSystemTasks) {
                 VideoSystemTaskReqParam videoSystemTaskReqParam = getVideoSystemTaskReqParam(videoSystemTask);
                 List<VideoSystemTaskConfig> videoSystemTaskConfigs = videoSystemTaskConfigMapper.getTaskConfigs(videoSystemTask.getId(), taskQueryParam.getKeyword());
                 if (!videoSystemTaskConfigs.isEmpty()) {
                     getVideoSystemTaskReqParam(videoSystemTask, videoSystemTaskReqParam, videoSystemTaskConfigs);
+                    taskIds.add(videoSystemTask.getId());
                     result.add(videoSystemTaskReqParam);
                 }
-
-
             }
+            if (!Strings.isBlank(taskQueryParam.getKeyword())) {
+                if (taskIds.size() > 0) {
+                    result.setTotal(videoSystemTaskMapper.countByIds(taskIds, taskQueryParam.getUserId()));
+                } else {
+                    result.setTotal(0);
+                }
+            } else {
+                result.setTotal(videoSystemTasks.getTotal());
+            }
+
+
         } catch (Exception e) {
             log.info("获取任务列表失败", e);
         }

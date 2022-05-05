@@ -258,6 +258,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
+
   <update id="updateByExampleSelective" parameterType="map">
     update video_system_task
     <set>
@@ -450,6 +451,12 @@
 
   </update>
 
-
+  <select id="countByIds" resultType="java.lang.Long">
+        select count(1) from video_system_task where user_id =#{userId}
+    and  id in
+    <foreach collection="taskIds" item="taskId" open="(" close=")" separator=",">
+       #{taskId}
+    </foreach>
+  </select>
 
 </mapper>

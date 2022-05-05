@@ -37,4 +37,6 @@ public interface VideoSystemTaskMapper {
 
 
     void updateTaskOpenStatus(@Param("taskId")Integer taskId, @Param("code")Integer code);
+
+    long countByIds(@Param("taskIds")List<Integer> taskIds, @Param("userId")Integer userId);
 }
