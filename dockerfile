@@ -1,16 +1,17 @@
-FROM openjdk:8 as build                         
+FROM kevinyan001/aliyun-mvn:0.0.1 AS MAVEN_BUILD
 
-COPY .mvn .mvn                                               
-COPY mvnw .                                                  
-COPY pom.xml .                                               
-COPY src src                                                 
+COPY pom.xml /build/
+COPY src /build/src
 
-RUN ./mvnw -B package                                        
+WORKDIR /build/
+# mount anonymous host directory as .m2 storage for contianer 
+VOLUME /root/.m2
 
-FROM openjdk:8                              
+RUN mvn clean package -Dmaven.test.skip=true --quiet
 
-COPY --from=build target/fast-maven-builds-1.0.jar .         
+FROM openjdk:8-jre
 
-EXPOSE 8080
 
-ENTRYPOINT ["java", "-jar", "fast-maven-builds-1.0.jar"]   
+COPY --from=MAVEN_BUILD /build/target/*.jar /app/application.jar
+
+ENTRYPOINT ["java", "-jar", "/app/application.jar"]
