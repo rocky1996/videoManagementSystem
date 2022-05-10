@@ -63,4 +63,10 @@ public class CommonController {
     public RestResult<List<TaskStatusResp>> getTaskStatusList() {
         return new RestResult<>(RestEnum.SUCCESS, Arrays.stream(TaskStatusEnum.values()).map(e -> new TaskStatusResp().setTaskStatusIs(e.getCode()).setTaskStatusName(e.getName())).collect(Collectors.toList()));
     }
+
+    @GetMapping("/getLanguageTypeList")
+    @Menu(firstMenu = FirstMenuEnum.TASK_DISTRIBUTION)
+    public RestResult<List<LanguageTypeResp>> getLanguageTypeList() {
+        return new RestResult<>(RestEnum.SUCCESS, Arrays.stream(LanguagesTypeEnum.values()).map(e -> new LanguageTypeResp().setLanguageId(e.getCode()).setLanguageName(e.getName())).collect(Collectors.toList()));
+    }
 }
