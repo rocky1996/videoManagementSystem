@@ -10,7 +10,7 @@ public enum FirstMenuEnum {
     PUSH_RECORD(1, "推送记录", MenuResult.getPushRecordList()),
     ISSUE_DISTRIBUTION(2, "审核下发", MenuResult.getIssueList()),
     TASK_MONITORING(3, "任务监控", MenuResult.getTaskMonitoringList()),
-    SYSTEM_MANAGEMENT(4, "系统管理", MenuResult.getSystemList()),
+    SYSTEM_MANAGEMENT(4, "系统设置", MenuResult.getSystemList()),
     ;
 
     private Integer code;
