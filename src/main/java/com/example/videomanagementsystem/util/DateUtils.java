@@ -36,5 +36,8 @@ public class DateUtils {
         return date;
     }
 
-
+    public static String timeStampToDate(Long time) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//要转换的时间格式
+        return formatter.format(new Date(time));
+    }
 }

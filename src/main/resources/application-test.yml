@@ -29,8 +29,6 @@ mybatis:
   mapper-locations: classpath:mapper/**/*.xml
   type-aliases-package: com.example.videomanagementsystem.domain
 
-<<<<<<< HEAD
-
 kafka:
   bootstrap-servers: 47.93.185.66:5672
   topic: wujinfan
@@ -54,7 +52,7 @@ kafka:
     group:
       id: consumer-group-id  #消费组id
     concurrency: 10   #设置消费线程数
-=======
+
 pagehelper:
   helperDialect: mysql
   reasonable: true                #开启优化，如果开启优化，在分页页码结果没有数据的时候,会显示有数据的页码数据
@@ -68,4 +66,3 @@ logging:
         example:
           videomanagementsystem:
             mapper : debug
->>>>>>> mybatis_generator

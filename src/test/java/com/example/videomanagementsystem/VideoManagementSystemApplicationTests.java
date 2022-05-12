@@ -1,10 +1,10 @@
 package com.example.videomanagementsystem;
 
+import com.example.videomanagementsystem.controller.req.KnowLedgeReq;
 import com.example.videomanagementsystem.kafkamq.producer.Producer;
 import com.example.videomanagementsystem.outerInterface.KnowledgeOuterInterface;
 import com.example.videomanagementsystem.util.JacksonUtil;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -55,7 +55,7 @@ class VideoManagementSystemApplicationTests {
 
     @Test
     public void test02(){
-        Map<String, Object> map = knowledgeOuterInterface.getKnowLedgeInfo("拜登", null, null);
+        Map<String, Object> map = knowledgeOuterInterface.getKnowLedgeInfo(new KnowLedgeReq().setKeyWord("拜登").setPage(null).setPageSize(null));
         System.out.println(JacksonUtil.beanToStr(map));
     }
 }

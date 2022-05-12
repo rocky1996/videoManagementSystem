@@ -1,5 +1,6 @@
 package com.example.videomanagementsystem.outerInterface;
 
+import com.example.videomanagementsystem.controller.req.KnowLedgeReq;
 import com.example.videomanagementsystem.util.JacksonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -60,7 +61,7 @@ public class KnowledgeOuterInterface {
      * @param keyWordValue
      * @return
      */
-    public Map<String, Object> getKnowLedgeInfo(String keyWordValue, Integer page, Integer pageSize) {
+    public Map<String, Object> getKnowLedgeInfo(KnowLedgeReq knowLedgeReq) {
 
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
@@ -69,11 +70,11 @@ public class KnowledgeOuterInterface {
         paramMap.put(KG_KEY, KG_VALUE);
         paramMap.put(ENTITY_NAME_KEY, ENTITY_NAME_VALUE);
         paramMap.put(ENTITY_TYPE_KEY, ENTITY_TYPE_VALUE);
-        paramMap.put(KEY_WORD_KEY, keyWordValue);
+        paramMap.put(KEY_WORD_KEY, knowLedgeReq.getKeyWord());
         paramMap.put(MODE_KEY, MODE_VALUE);
         paramMap.put(NATION_KEY, NATION_VALUE);
-        paramMap.put(PAGE_KEY, page != null ? page : PAGE_VALUE);
-        paramMap.put(PAGE_SIZE_KEY, pageSize != null ? pageSize : PAGE_SIZE_VALUE);
+        paramMap.put(PAGE_KEY, knowLedgeReq.getPage() != null ? knowLedgeReq.getPage() : PAGE_VALUE);
+        paramMap.put(PAGE_SIZE_KEY, knowLedgeReq.getPageSize() != null ? knowLedgeReq.getPageSize() : PAGE_SIZE_VALUE);
         OuterResp outerResp = restTemplate.getForObject(KNOWLEDGE_URL, OuterResp.class, paramMap);
         stopWatch.stop();
         log.info("获取知识图谱远程接口数据,paramMap:{},outerResp:{},time:{}", JacksonUtil.beanToStr(paramMap), JacksonUtil.beanToStr(outerResp), stopWatch.getTotalTimeMillis());
