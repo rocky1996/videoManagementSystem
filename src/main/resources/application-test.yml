@@ -6,8 +6,8 @@ spring:
 
   datasource:
     username: root
-    password: root
-    url: jdbc:mysql://127.0.0.1:3306/videoManagementSystem?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+    password: admin123
+    url: jdbc:mysql://47.93.185.66:3307/videoManagementSystem?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
     driver-class-name: com.mysql.jdbc.Driver
     type: org.springframework.jdbc.datasource.DriverManagerDataSource
     dbcp2:
@@ -29,6 +29,7 @@ mybatis:
   mapper-locations: classpath:mapper/**/*.xml
   type-aliases-package: com.example.videomanagementsystem.domain
 
+<<<<<<< HEAD
 
 kafka:
   bootstrap-servers: 47.93.185.66:5672
@@ -53,3 +54,18 @@ kafka:
     group:
       id: consumer-group-id  #消费组id
     concurrency: 10   #设置消费线程数
+=======
+pagehelper:
+  helperDialect: mysql
+  reasonable: true                #开启优化，如果开启优化，在分页页码结果没有数据的时候,会显示有数据的页码数据
+  supportMethodsArguments: true   #是否支持接口参数来传递分页参数，默认false
+  pageSizeZero: false             #pageSize=0 返回所有
+  params: count=countSql
+
+logging:
+    level:
+      com:
+        example:
+          videomanagementsystem:
+            mapper : debug
+>>>>>>> mybatis_generator

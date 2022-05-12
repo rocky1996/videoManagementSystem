@@ -11,7 +11,9 @@ public enum SecondMenuEnum {
     USER_MANAGEMENT(3, "用户管理"),
     ROLE_MANAGEMENT(4, "角色管理"),
     CUSTOMER_MANAGEMENT(5, "客户管理"),
-    FEEDBACK(6, "反馈意见");
+    FEEDBACK(6, "反馈意见"),
+
+    AUTO_ALLOCATION_RULES(7, "自动分配规则"),
     ;
 
     private Integer code;

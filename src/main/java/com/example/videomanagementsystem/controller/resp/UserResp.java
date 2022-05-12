@@ -1,6 +1,8 @@
 package com.example.videomanagementsystem.controller.resp;
 
+import com.example.videomanagementsystem.domain.VideoSystemRole;
 import com.example.videomanagementsystem.domain.VideoSystemUser;
+import com.example.videomanagementsystem.enums.StatusEnum;
 import lombok.Builder;
 import lombok.Data;
 
@@ -8,14 +10,35 @@ import lombok.Data;
 @Builder
 public class UserResp {
 
-    private long id;
+    private long userId;
 
-    private String userName;
+    private String username;
 
-    public static UserResp convert(VideoSystemUser videoSystemUser) {
+    private String password;
+
+    private String userDesc;
+
+    private long userRoleId;
+
+    private String userRoleName;
+
+    private long statusId;
+
+    private String statusName;
+
+    public static UserResp convert(VideoSystemUser user, VideoSystemRole role) {
+        if (user == null) {
+            return null;
+        }
         return UserResp.builder()
-                .id(videoSystemUser.getId())
-                .userName(videoSystemUser.getUsername())
+                .userId(user.getId())
+                .username(user.getUsername())
+                .password(user.getPassword())
+                .userDesc(user.getUserDesc())
+                .userRoleId(role.getId())
+                .userRoleName(role.getRoleName())
+                .statusId(user.getUserStatus())
+                .statusName(StatusEnum.getStatusEnum(user.getUserStatus()).getName())
                 .build();
     }
 }

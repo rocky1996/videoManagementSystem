@@ -19,6 +19,7 @@ public class MenuResult {
         systemList.add(SecondMenuEnum.ROLE_MANAGEMENT);
         systemList.add(SecondMenuEnum.CUSTOMER_MANAGEMENT);
         systemList.add(SecondMenuEnum.FEEDBACK);
+        systemList.add(SecondMenuEnum.AUTO_ALLOCATION_RULES);
     }
 
     public static List<SecondMenuEnum> getTaskDistributionList() {return taskDistributionList;}
