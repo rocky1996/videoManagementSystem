@@ -1,16 +1,23 @@
 package com.example.videomanagementsystem;
 
 import com.example.videomanagementsystem.kafkamq.producer.Producer;
+import com.example.videomanagementsystem.outerInterface.KnowledgeOuterInterface;
+import com.example.videomanagementsystem.util.JacksonUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import javax.annotation.Resource;
+import java.util.Map;
+
 @SpringBootTest
 class VideoManagementSystemApplicationTests {
 
-    @Autowired
+    @Resource
     private Producer producer;
+    @Resource
+    private KnowledgeOuterInterface knowledgeOuterInterface;
 
     @Value("${kafka.bootstrap-servers}")
     private String servers;
@@ -36,13 +43,19 @@ class VideoManagementSystemApplicationTests {
 
     @Test
     public void test01(){
-//        System.out.println(servers);
-//        System.out.println(enableAutoCommit);
-//        System.out.println(sessionTimeout);
-//        System.out.println(autoCommitInterval);
-//        System.out.println(groupId);
-//        System.out.println(autoOffsetReset);
-//        System.out.println(concurrency);
+        System.out.println(servers);
+        System.out.println(enableAutoCommit);
+        System.out.println(sessionTimeout);
+        System.out.println(autoCommitInterval);
+        System.out.println(groupId);
+        System.out.println(autoOffsetReset);
+        System.out.println(concurrency);
         System.out.println(topicName);
+    }
+
+    @Test
+    public void test02(){
+        Map<String, Object> map = knowledgeOuterInterface.getKnowLedgeInfo("拜登", null, null);
+        System.out.println(JacksonUtil.beanToStr(map));
     }
 }
