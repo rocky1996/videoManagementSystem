@@ -53,12 +53,9 @@ public class KnowledgeOuterInterface {
     private static String PAGE_SIZE_KEY = "pageSize";
     private static Integer PAGE_SIZE_VALUE = 20;
 
-    private static String KNOWLEDGE_URL = "http://101.42.105.86/gateway/api/api/v1/search?kg={kg}&key={key}&keyword={keyword}&page={page}&pageSize={pageSize}&entityType={entityType}&nation={nation}&mode={mode}";
-    private static String KNOWLEDGE_DETAIL_URL = "http://101.42.105.86/graph/#/Entity/Entity?graphKey=kg_base&id=";
-
     /**
      * 获取知识库
-     * @param keyWordValue
+     * @param knowLedgeReq
      * @return
      */
     public Map<String, Object> getKnowLedgeInfo(KnowLedgeReq knowLedgeReq) {
@@ -75,7 +72,7 @@ public class KnowledgeOuterInterface {
         paramMap.put(NATION_KEY, NATION_VALUE);
         paramMap.put(PAGE_KEY, knowLedgeReq.getPage() != null ? knowLedgeReq.getPage() : PAGE_VALUE);
         paramMap.put(PAGE_SIZE_KEY, knowLedgeReq.getPageSize() != null ? knowLedgeReq.getPageSize() : PAGE_SIZE_VALUE);
-        OuterResp outerResp = restTemplate.getForObject(KNOWLEDGE_URL, OuterResp.class, paramMap);
+        OuterResp outerResp = restTemplate.getForObject(OutUrlContants.KNOWLEDGE_URL, OuterResp.class, paramMap);
         stopWatch.stop();
         log.info("获取知识图谱远程接口数据,paramMap:{},outerResp:{},time:{}", JacksonUtil.beanToStr(paramMap), JacksonUtil.beanToStr(outerResp), stopWatch.getTotalTimeMillis());
 
@@ -92,6 +89,6 @@ public class KnowledgeOuterInterface {
      * @return
      */
     public String getKnowledgeDetailUrl(String entityId) {
-        return StringUtils.isNotBlank(entityId) ? KNOWLEDGE_DETAIL_URL + entityId : "";
+        return StringUtils.isNotBlank(entityId) ? OutUrlContants.KNOWLEDGE_DETAIL_URL + entityId : "";
     }
 }
