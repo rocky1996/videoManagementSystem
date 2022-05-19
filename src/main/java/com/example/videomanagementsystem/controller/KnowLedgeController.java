@@ -4,7 +4,7 @@ import com.example.videomanagementsystem.constants.RestResult;
 import com.example.videomanagementsystem.controller.req.KnowLedgeReq;
 import com.example.videomanagementsystem.controller.resp.KnowLedgeResp;
 import com.example.videomanagementsystem.enums.RestEnum;
-import com.example.videomanagementsystem.outerInterface.KnowledgeOuterInterface;
+import com.example.videomanagementsystem.outerInterface.impl.KnowledgeOuterInterface;
 import com.example.videomanagementsystem.util.DateUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.CollectionUtils;

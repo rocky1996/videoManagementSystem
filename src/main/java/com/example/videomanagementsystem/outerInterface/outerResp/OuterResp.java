@@ -1,4 +1,4 @@
-package com.example.videomanagementsystem.outerInterface;
+package com.example.videomanagementsystem.outerInterface.outerResp;
 
 import lombok.Data;
 

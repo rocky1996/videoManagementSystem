@@ -1,6 +1,8 @@
-package com.example.videomanagementsystem.outerInterface;
+package com.example.videomanagementsystem.outerInterface.impl;
 
 import com.example.videomanagementsystem.controller.req.KnowLedgeReq;
+import com.example.videomanagementsystem.outerInterface.outerConstants.OutUrlContants;
+import com.example.videomanagementsystem.outerInterface.outerResp.OuterResp;
 import com.example.videomanagementsystem.util.JacksonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

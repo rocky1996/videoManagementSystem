@@ -1,4 +1,4 @@
-package com.example.videomanagementsystem.outerInterface;
+package com.example.videomanagementsystem.outerInterface.outerConstants;
 
 public class OutUrlContants {
     //TODO

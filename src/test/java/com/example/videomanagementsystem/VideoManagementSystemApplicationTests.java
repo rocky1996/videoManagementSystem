@@ -2,7 +2,7 @@ package com.example.videomanagementsystem;
 
 import com.example.videomanagementsystem.controller.req.KnowLedgeReq;
 import com.example.videomanagementsystem.kafkamq.producer.Producer;
-import com.example.videomanagementsystem.outerInterface.KnowledgeOuterInterface;
+import com.example.videomanagementsystem.outerInterface.impl.KnowledgeOuterInterface;
 import com.example.videomanagementsystem.util.JacksonUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Value;
