@@ -1,4 +1,4 @@
-package com.example.videomanagementsystem.config;
+package com.example.videomanagementsystem.config.kafka;
 
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;

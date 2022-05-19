@@ -1,4 +1,4 @@
-package com.example.videomanagementsystem.config;
+package com.example.videomanagementsystem.config.redis;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

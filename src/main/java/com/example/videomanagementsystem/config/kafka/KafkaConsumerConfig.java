@@ -1,4 +1,4 @@
-package com.example.videomanagementsystem.config;
+package com.example.videomanagementsystem.config.kafka;
 
 import com.example.videomanagementsystem.kafkamq.consumer.RawDataListener;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
