@@ -1,5 +1,6 @@
 package com.example.videomanagementsystem.controller;
 
+import com.example.videomanagementsystem.aop.CostTime;
 import com.example.videomanagementsystem.constants.RestResult;
 import com.example.videomanagementsystem.controller.req.KnowLedgeReq;
 import com.example.videomanagementsystem.controller.resp.KnowLedgeResp;
@@ -26,6 +27,7 @@ public class KnowLedgeController {
     private KnowledgeOuterInterface knowledgeOuterInterface;
 
     @PostMapping("/getKnowLedgeInfoList")
+    @CostTime(interfaceName = "getKnowLedgeInfoList")
     private RestResult<KnowLedgeResp> getKnowLedgeInfoList(@RequestBody @Valid KnowLedgeReq knowLedgeReq){
         Map<String, Object> knowMap = knowledgeOuterInterface.getKnowLedgeInfo(knowLedgeReq);
         if (Objects.isNull(knowMap)) {

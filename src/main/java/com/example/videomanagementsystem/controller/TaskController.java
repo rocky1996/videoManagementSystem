@@ -1,6 +1,7 @@
 package com.example.videomanagementsystem.controller;
 
 
+import com.example.videomanagementsystem.aop.CostTime;
 import com.example.videomanagementsystem.constants.PageResult;
 import com.example.videomanagementsystem.constants.RestResult;
 import com.example.videomanagementsystem.controller.auth.Menu;
@@ -33,6 +34,7 @@ public class TaskController {
      */
     @PostMapping("createTask")
     @Menu(firstMenu = FirstMenuEnum.TASK_DISTRIBUTION)
+    @CostTime(interfaceName = "createTask")
     public RestResult<Void> createTask(@RequestBody VideoSystemTaskReqParam entity) {
         try {
             videoSystemTaskService.createTask(entity);
@@ -51,6 +53,7 @@ public class TaskController {
      */
     @GetMapping("deleteTask/{taskId}")
     @Menu(firstMenu = FirstMenuEnum.TASK_DISTRIBUTION)
+    @CostTime(interfaceName = "deleteTask")
     public RestResult<Void> deleteTask(@PathVariable("taskId") Integer taskId) {
         try {
             videoSystemTaskService.deleteTask(taskId);
@@ -71,6 +74,7 @@ public class TaskController {
      */
     @GetMapping("openTask/{taskId}")
     @Menu(firstMenu = FirstMenuEnum.TASK_DISTRIBUTION)
+    @CostTime(interfaceName = "openTask")
     public RestResult<Void> openTask(@PathVariable("taskId") Integer taskId) {
         try {
             videoSystemTaskService.openTask(taskId);
@@ -89,6 +93,7 @@ public class TaskController {
      */
     @GetMapping("getTaskInfo/{taskId}")
     @Menu(firstMenu = FirstMenuEnum.TASK_DISTRIBUTION)
+    @CostTime(interfaceName = "getTaskInfo")
     public RestResult<VideoSystemTaskReqParam> getTaskInfo(@PathVariable("taskId") Integer taskId) {
         VideoSystemTaskReqParam taskInfo = null;
         try {
@@ -102,6 +107,7 @@ public class TaskController {
 
     @PostMapping("getTaskInfoList")
     @Menu(firstMenu = FirstMenuEnum.TASK_DISTRIBUTION)
+    @CostTime(interfaceName = "getTaskInfoList")
     public RestResult<PageResult<VideoSystemTaskReqParam>> getTaskInfoList(@RequestBody TaskQueryParamReq taskQueryParam) {
         try {
             List<VideoSystemTaskReqParam> list = videoSystemTaskService.getTaskInfoList(taskQueryParam.convert());
