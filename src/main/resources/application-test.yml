@@ -25,18 +25,18 @@ spring:
       remove-abandoned-on-maintenance: true
       connection-init-sqls: set names utf8mb4
 
-#redis配置信息
-redis:
-  database: 0
-  host:
-  password:
-  port: 6380
-  timeout: 5000
-  pool:
-    max-active: 8
-    max-wait: -1
-    max-idle: 8
-    min-idle: 0
+  #redis配置信息
+  redis:
+    database: 0
+    host:
+    password:
+    port: 6380
+    timeout: 5000
+    pool:
+      max-active: 8
+      max-wait: -1
+      max-idle: 8
+      min-idle: 0
 
 mybatis:
   mapper-locations: classpath:mapper/**/*.xml

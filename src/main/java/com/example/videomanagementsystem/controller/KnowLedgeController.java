@@ -6,7 +6,7 @@ import com.example.videomanagementsystem.constants.UrlConstants;
 import com.example.videomanagementsystem.controller.req.KnowLedgeReq;
 import com.example.videomanagementsystem.controller.resp.KnowLedgeResp;
 import com.example.videomanagementsystem.enums.RestEnum;
-import com.example.videomanagementsystem.outerInterface.impl.KnowledgeOuterInterface;
+import com.example.videomanagementsystem.outerInterface.outImpl.KnowledgeOuterServiceImpl;
 import com.example.videomanagementsystem.util.DateUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.CollectionUtils;
@@ -25,12 +25,12 @@ import java.util.*;
 public class KnowLedgeController {
 
     @Resource
-    private KnowledgeOuterInterface knowledgeOuterInterface;
+    private KnowledgeOuterServiceImpl knowledgeOuterServiceImpl;
 
     @PostMapping("/getKnowLedgeInfoList")
     @CostTime(interfaceName = "getKnowLedgeInfoList")
     private RestResult<KnowLedgeResp> getKnowLedgeInfoList(@RequestBody @Valid KnowLedgeReq knowLedgeReq){
-        Map<String, Object> knowMap = knowledgeOuterInterface.getKnowLedgeInfo(knowLedgeReq);
+        Map<String, Object> knowMap = knowledgeOuterServiceImpl.getKnowLedgeInfo(knowLedgeReq);
         if (Objects.isNull(knowMap)) {
             return new RestResult(RestEnum.SYSTEM_ERROR);
         }
@@ -43,7 +43,7 @@ public class KnowLedgeController {
         Integer total = (Integer) knowMap.get("total");
         List<KnowLedgeResp.ItemDetail> itemDetailList = new ArrayList<>();
         for (Map<String, Object> itemMap : itemList) {
-            String url = Objects.isNull(itemMap.get("entity_id")) ? "" : knowledgeOuterInterface.getKnowledgeDetailUrl((String) itemMap.get("entity_id"));
+            String url = Objects.isNull(itemMap.get("entity_id")) ? "" : knowledgeOuterServiceImpl.getKnowledgeDetailUrl((String) itemMap.get("entity_id"));
             String entityName = Objects.isNull(itemMap.get("entity_name")) ? "" : (String) itemMap.get("entity_name");
             String entityTypeName = Objects.isNull(itemMap.get("entity_type_name")) ? "" : (String) itemMap.get("entity_type_name");
             String includeTime = Objects.isNull(itemMap.get("last_update")) ? "" : DateUtils.timeStampToDate((Long) itemMap.get("last_update"));

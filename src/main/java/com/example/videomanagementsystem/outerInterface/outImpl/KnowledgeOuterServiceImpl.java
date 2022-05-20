@@ -1,4 +1,4 @@
-package com.example.videomanagementsystem.outerInterface.impl;
+package com.example.videomanagementsystem.outerInterface.outImpl;
 
 import com.example.videomanagementsystem.controller.req.KnowLedgeReq;
 import com.example.videomanagementsystem.outerInterface.outerConstants.OutUrlContants;
@@ -19,7 +19,7 @@ import java.util.Objects;
 @Component
 @Slf4j
 @Service
-public class KnowledgeOuterInterface {
+public class KnowledgeOuterServiceImpl {
 
     @Resource
     private RestTemplate restTemplate;

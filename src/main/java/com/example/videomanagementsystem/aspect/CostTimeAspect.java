@@ -29,18 +29,13 @@ public class CostTimeAspect {
         String methodCName = costTime.interfaceName();
         //拦截class
         Class clazz = proceedingJoinPoint.getTarget().getClass();
-
         long startTime = System.currentTimeMillis();
-        //取拦截的Args
-        Object[] args = proceedingJoinPoint.getArgs();
-        //运行被拦截的方法
-        Object result = proceedingJoinPoint.proceed(args);
-        //若开关为 true 开启打印
+        //若开关为 true
         if (costTime.enablePrint()){
             long endTime = System.currentTimeMillis();
             long diffTime = endTime - startTime;
             log.info(clazz.getName()+methodCName+"的耗时是:{},当前时间是:{}",diffTime,new Date());
         }
-        return result;
+        return proceedingJoinPoint.proceed(proceedingJoinPoint.getArgs());
     }
 }

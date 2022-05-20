@@ -2,7 +2,7 @@ package com.example.videomanagementsystem;
 
 import com.example.videomanagementsystem.controller.req.KnowLedgeReq;
 import com.example.videomanagementsystem.kafkamq.producer.Producer;
-import com.example.videomanagementsystem.outerInterface.impl.KnowledgeOuterInterface;
+import com.example.videomanagementsystem.outerInterface.outImpl.KnowledgeOuterServiceImpl;
 import com.example.videomanagementsystem.util.JacksonUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,7 +17,7 @@ class VideoManagementSystemApplicationTests {
     @Resource
     private Producer producer;
     @Resource
-    private KnowledgeOuterInterface knowledgeOuterInterface;
+    private KnowledgeOuterServiceImpl knowledgeOuterServiceImpl;
 
     @Value("${kafka.bootstrap-servers}")
     private String servers;
@@ -55,7 +55,7 @@ class VideoManagementSystemApplicationTests {
 
     @Test
     public void test02(){
-        Map<String, Object> map = knowledgeOuterInterface.getKnowLedgeInfo(new KnowLedgeReq().setKeyWord("拜登").setPage(null).setPageSize(null));
+        Map<String, Object> map = knowledgeOuterServiceImpl.getKnowLedgeInfo(new KnowLedgeReq().setKeyWord("拜登").setPage(null).setPageSize(null));
         System.out.println(JacksonUtil.beanToStr(map));
     }
 }
