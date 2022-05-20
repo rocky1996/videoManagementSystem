@@ -2,6 +2,7 @@ package com.example.videomanagementsystem.controller;
 
 import com.example.videomanagementsystem.aop.CostTime;
 import com.example.videomanagementsystem.constants.RestResult;
+import com.example.videomanagementsystem.constants.UrlConstants;
 import com.example.videomanagementsystem.controller.auth.Menu;
 import com.example.videomanagementsystem.controller.resp.*;
 import com.example.videomanagementsystem.enums.*;
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
-@RequestMapping("/videoSystem/common")
+@RequestMapping(UrlConstants.COMMON_URL)
 public class CommonController {
 
     @GetMapping("/getMenuList")

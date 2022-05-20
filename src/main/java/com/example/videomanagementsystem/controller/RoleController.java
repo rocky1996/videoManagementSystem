@@ -3,6 +3,7 @@ package com.example.videomanagementsystem.controller;
 import com.example.videomanagementsystem.aop.CostTime;
 import com.example.videomanagementsystem.constants.PageResult;
 import com.example.videomanagementsystem.constants.RestResult;
+import com.example.videomanagementsystem.constants.UrlConstants;
 import com.example.videomanagementsystem.controller.auth.Menu;
 import com.example.videomanagementsystem.controller.req.RoleQueryReq;
 import com.example.videomanagementsystem.controller.req.RoleReq;
@@ -31,7 +32,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
-@RequestMapping("/videoSystem/role")
+@RequestMapping(UrlConstants.ROLE_URL)
 public class RoleController {
 
     @Autowired

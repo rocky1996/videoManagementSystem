@@ -3,6 +3,7 @@ package com.example.videomanagementsystem.controller;
 import com.example.videomanagementsystem.aop.CostTime;
 import com.example.videomanagementsystem.constants.PageResult;
 import com.example.videomanagementsystem.constants.RestResult;
+import com.example.videomanagementsystem.constants.UrlConstants;
 import com.example.videomanagementsystem.controller.auth.Auth;
 import com.example.videomanagementsystem.controller.auth.JwtUtils;
 import com.example.videomanagementsystem.controller.auth.Menu;
@@ -34,7 +35,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
-@RequestMapping("/videoSystem/user")
+@RequestMapping(UrlConstants.USER_URL)
 public class UserController {
 
     @Autowired

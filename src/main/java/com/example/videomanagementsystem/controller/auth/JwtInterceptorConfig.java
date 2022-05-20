@@ -12,7 +12,7 @@ public class JwtInterceptorConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         //默认拦截所有路径
-        registry.addInterceptor(authenticationInterceptor()).addPathPatterns("/videoSystem/**");
+//        registry.addInterceptor(authenticationInterceptor()).addPathPatterns("/videoSystem/**");
     }
 
     @Bean

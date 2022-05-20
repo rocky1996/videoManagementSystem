@@ -2,6 +2,7 @@ package com.example.videomanagementsystem.controller;
 
 import com.example.videomanagementsystem.aop.CostTime;
 import com.example.videomanagementsystem.constants.RestResult;
+import com.example.videomanagementsystem.constants.UrlConstants;
 import com.example.videomanagementsystem.controller.req.KnowLedgeReq;
 import com.example.videomanagementsystem.controller.resp.KnowLedgeResp;
 import com.example.videomanagementsystem.enums.RestEnum;
@@ -20,7 +21,7 @@ import java.util.*;
 
 @Slf4j
 @RestController
-@RequestMapping("/videoSystem/knowLedge")
+@RequestMapping(UrlConstants.KNOWLEDGE_URL)
 public class KnowLedgeController {
 
     @Resource

@@ -4,6 +4,7 @@ package com.example.videomanagementsystem.controller;
 import com.example.videomanagementsystem.aop.CostTime;
 import com.example.videomanagementsystem.constants.PageResult;
 import com.example.videomanagementsystem.constants.RestResult;
+import com.example.videomanagementsystem.constants.UrlConstants;
 import com.example.videomanagementsystem.controller.auth.Menu;
 import com.example.videomanagementsystem.domain.*;
 import com.example.videomanagementsystem.enums.FirstMenuEnum;
@@ -21,7 +22,7 @@ import java.util.List;
  */
 @RestController
 @Slf4j
-@RequestMapping("videoSystem/task")
+@RequestMapping(UrlConstants.TASK_URL)
 public class TaskController {
 
     @Autowired

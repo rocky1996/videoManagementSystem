@@ -59,6 +59,14 @@ public class HandlerQpsNodeExpiredCache {
     }
 
     /**
+     * 获取全部localCache
+     * @return
+     */
+    public Map<String, QpsNode> getQpsNodeLocalCache() {
+        return qpsNodeLocalCache;
+    }
+
+    /**
      * set值
      * @param key
      * @param ttl

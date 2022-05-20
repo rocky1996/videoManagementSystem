@@ -29,7 +29,7 @@ public class QpsAspect {
         String requestPath = httpServletRequest.getRequestURI();
         String cacheKey= requestPath.substring(requestPath.lastIndexOf("/") + 1, requestPath.length());
         //设置过期时间为1000ms
-        handlerQpsNodeExpiredCache.setQpsNode(cacheKey, 60000L);
+        handlerQpsNodeExpiredCache.setQpsNode(cacheKey, 300000L);
         return;
     }
 }
