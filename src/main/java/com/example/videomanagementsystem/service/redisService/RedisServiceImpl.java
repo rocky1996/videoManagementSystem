@@ -1,7 +1,6 @@
 package com.example.videomanagementsystem.service.redisService;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.kafka.common.protocol.types.Field;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -89,6 +88,7 @@ public class RedisServiceImpl {
      * @param key
      * @param timeOut
      * @param timeUnit
+     * @param isLeft
      */
     public void pop(String key, Long timeOut, TimeUnit timeUnit, boolean isLeft) {
         if (isLeft) {
@@ -132,6 +132,7 @@ public class RedisServiceImpl {
      * @param key
      * @param hk
      * @param hv
+     * @param isAbsent
      */
     public void put(String key, Object hk, Object hv, boolean isAbsent) {
         if (isAbsent) {
