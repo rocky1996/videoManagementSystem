@@ -23,13 +23,13 @@ public class QpsAspect {
     public void postMapping() {}
 
     @Before("getMapping() || postMapping()")
-    public Object beforeQpsAspect(ProceedingJoinPoint joinPoint) throws Throwable{
+    public void beforeQpsAspect() throws Throwable{
         ServletRequestAttributes servletRequestAttributes =(ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest httpServletRequest = servletRequestAttributes.getRequest();
         String requestPath = httpServletRequest.getRequestURI();
         String cacheKey= requestPath.substring(requestPath.lastIndexOf("/") + 1, requestPath.length());
         //设置过期时间为1000ms
         handlerQpsNodeExpiredCache.setQpsNode(cacheKey, 60000L);
-        return joinPoint.proceed();
+        return;
     }
 }
