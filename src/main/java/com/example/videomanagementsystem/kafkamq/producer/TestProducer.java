@@ -1,6 +1,6 @@
 package com.example.videomanagementsystem.kafkamq.producer;
 
-import com.example.videomanagementsystem.kafkamq.LogMsg;
+import com.example.videomanagementsystem.kafkamq.mqBean.LogMsg;
 import com.example.videomanagementsystem.util.JacksonUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Component
-public class Producer {
+public class TestProducer {
 
     @Resource
     private KafkaTemplate kafkaTemplate;

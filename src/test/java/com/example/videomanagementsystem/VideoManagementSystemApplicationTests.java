@@ -1,7 +1,7 @@
 package com.example.videomanagementsystem;
 
 import com.example.videomanagementsystem.controller.req.KnowLedgeReq;
-import com.example.videomanagementsystem.kafkamq.producer.Producer;
+import com.example.videomanagementsystem.kafkamq.producer.TestProducer;
 import com.example.videomanagementsystem.outerInterface.outImpl.KnowledgeOuterServiceImpl;
 import com.example.videomanagementsystem.util.JacksonUtil;
 import org.junit.jupiter.api.Test;
@@ -14,13 +14,13 @@ import java.util.Map;
 class VideoManagementSystemApplicationTests {
 
     @Resource
-    private Producer producer;
+    private TestProducer testProducer;
     @Resource
     private KnowledgeOuterServiceImpl knowledgeOuterServiceImpl;
 
     @Test
     void contextLoads() {
-        producer.send();
+        testProducer.send();
     }
 
     @Test

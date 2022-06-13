@@ -1,4 +1,4 @@
-package com.example.videomanagementsystem.kafkamq;
+package com.example.videomanagementsystem.kafkamq.mqBean;
 
 import lombok.Builder;
 import lombok.Data;

@@ -1,6 +1,6 @@
 package com.example.videomanagementsystem.config.kafka;
 
-import com.example.videomanagementsystem.kafkamq.consumer.RawDataListener;
+import com.example.videomanagementsystem.kafkamq.consumer.TestRawDataListener;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -68,7 +68,7 @@ public class KafkaConsumerConfig {
      * @return
      */
     @Bean
-    public RawDataListener listener() {
-        return new RawDataListener();
+    public TestRawDataListener listener() {
+        return new TestRawDataListener();
     }
 }

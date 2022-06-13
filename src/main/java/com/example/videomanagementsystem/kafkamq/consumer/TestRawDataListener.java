@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @Component
 @Slf4j
-public class RawDataListener {
+public class TestRawDataListener {
 
     @Value("${kafka.topic}")
     private String topicName;
