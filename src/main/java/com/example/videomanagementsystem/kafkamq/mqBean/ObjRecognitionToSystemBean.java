@@ -13,7 +13,7 @@ public class ObjRecognitionToSystemBean {
     /**
      * 唯一标识
      */
-    private String onlyCode;
+    private Integer onlyCode;
 
     /**
      * url

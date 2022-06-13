@@ -1,7 +1,10 @@
 package com.example.videomanagementsystem.domain;
 
+import lombok.Builder;
+
 import java.util.Date;
 
+@Builder
 public class VideoSystemKeywords {
     private Integer id;
 
