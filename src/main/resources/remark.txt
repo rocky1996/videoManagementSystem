@@ -3,9 +3,6 @@
 github地址:
     https://github.com/rocky1996/videoManagementSystem
 
-
-
-<<<<<<< HEAD
 本系统 -> 物体识别
     topicName: systemToDistinguish
     groupName: systemToDistinguish-group-one
@@ -19,7 +16,3 @@ github地址:
 物体识别 -> 本系统
     topicName: distinguishToSystem
     groupName: distinguishToSystem-group-one
-=======
-
-
->>>>>>> mybatis_generator
