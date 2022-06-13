@@ -28,7 +28,7 @@ public class KnowLedgeController {
     private KnowledgeOuterServiceImpl knowledgeOuterServiceImpl;
 
     @PostMapping("/getKnowLedgeInfoList")
-    @CostTime(interfaceName = "getKnowLedgeInfoList")
+//    @CostTime(interfaceName = "getKnowLedgeInfoList")
     private RestResult<KnowLedgeResp> getKnowLedgeInfoList(@RequestBody @Valid KnowLedgeReq knowLedgeReq){
         Map<String, Object> knowMap = knowledgeOuterServiceImpl.getKnowLedgeInfo(knowLedgeReq);
         if (Objects.isNull(knowMap)) {

@@ -49,7 +49,7 @@ public class UserController {
 
     @PostMapping("/searchUserList")
     @Menu(firstMenu = FirstMenuEnum.SYSTEM_MANAGEMENT, secondMenu = SecondMenuEnum.USER_MANAGEMENT)
-    @CostTime(interfaceName = "getUsers")
+//    @CostTime(interfaceName = "getUsers")
     public RestResult<PageResult<UserResp>> getUsers(@RequestBody @Valid UserQueryReq req) {
         List<VideoSystemUser> users = userDao.selectUsers(req.convert());
         PageInfo<VideoSystemUser> pageInfo = new PageInfo<>(users);
@@ -65,7 +65,7 @@ public class UserController {
 
     @Auth(required = false)
     @PostMapping("/loginUser")
-    @CostTime(interfaceName = "login")
+//    @CostTime(interfaceName = "login")
     public RestResult<UserResp> login(HttpServletRequest httpServletRequest,
                                       @RequestBody @Valid UserLoginReq req) {
         try {
@@ -85,7 +85,7 @@ public class UserController {
 
     @PostMapping("/createOrUpdateUser")
     @Menu(firstMenu = FirstMenuEnum.SYSTEM_MANAGEMENT, secondMenu = SecondMenuEnum.USER_MANAGEMENT)
-    @CostTime(interfaceName = "createOrUpdateUser")
+//    @CostTime(interfaceName = "createOrUpdateUser")
     public RestResult<Void> createOrUpdateUser(@RequestBody @Valid UserReq req) {
         //创建
         if (req.getUserId() == null) {
@@ -124,7 +124,7 @@ public class UserController {
 
     @GetMapping("/deleteUser/{id}")
     @Menu(firstMenu = FirstMenuEnum.SYSTEM_MANAGEMENT, secondMenu = SecondMenuEnum.USER_MANAGEMENT)
-    @CostTime(interfaceName = "deleteUser")
+//    @CostTime(interfaceName = "deleteUser")
     public RestResult<Void> deleteUser(@PathVariable int id) {
         try {
             userService.deleteUser(id);
@@ -135,7 +135,7 @@ public class UserController {
     }
 
     @PostMapping("/updateUserPassword")
-    @CostTime(interfaceName = "updateUserPassword")
+//    @CostTime(interfaceName = "updateUserPassword")
     public RestResult<Void> updateUserPassword(@RequestBody @Valid UserPasswordResetReq req) {
         try {
             //确认newPassword

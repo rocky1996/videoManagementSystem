@@ -48,7 +48,7 @@ public class RoleController {
 
     @PostMapping("/searchRoleList")
     @Menu(firstMenu = FirstMenuEnum.SYSTEM_MANAGEMENT, secondMenu = SecondMenuEnum.ROLE_MANAGEMENT)
-    @CostTime(interfaceName = "getRoles")
+//    @CostTime(interfaceName = "getRoles")
     public RestResult<PageResult<RoleResp>> getRoles(@RequestBody @Valid RoleQueryReq req) {
         List<VideoSystemRole> roles = userRoleDao.selectRoles(req.convert());
         PageInfo<VideoSystemRole> pageInfo = new PageInfo<>(roles);
@@ -62,7 +62,7 @@ public class RoleController {
 
     @GetMapping("/getRoleList")
     @Menu(firstMenu = FirstMenuEnum.SYSTEM_MANAGEMENT, secondMenu = SecondMenuEnum.ROLE_MANAGEMENT)
-    @CostTime(interfaceName = "getOpenEffectiveRoles")
+//    @CostTime(interfaceName = "getOpenEffectiveRoles")
     public RestResult<List<RoleResp>> getOpenEffectiveRoles() {
         List<RoleResp> roleRespList = userRoleDao.selectOpenEffectiveRoles().stream()
                 .map(RoleResp::convert)
@@ -72,7 +72,7 @@ public class RoleController {
 
     @PostMapping("/createOrUpdateMenu")
     @Menu(firstMenu = FirstMenuEnum.SYSTEM_MANAGEMENT, secondMenu = SecondMenuEnum.ROLE_MANAGEMENT)
-    @CostTime(interfaceName = "createOrUpdateRole")
+//    @CostTime(interfaceName = "createOrUpdateRole")
     public RestResult<Void> createOrUpdateRole(@RequestBody @Valid RoleReq req) {
         //创建
         if (req.getRoleId() == null) {
@@ -108,7 +108,7 @@ public class RoleController {
 
     @GetMapping("/deleteRole/{id}")
     @Menu(firstMenu = FirstMenuEnum.SYSTEM_MANAGEMENT, secondMenu = SecondMenuEnum.ROLE_MANAGEMENT)
-    @CostTime(interfaceName = "deleteRole")
+//    @CostTime(interfaceName = "deleteRole")
     public RestResult<Void> deleteRole(@PathVariable int id) {
         try {
             userRoleService.deleteRole(id);
@@ -120,7 +120,7 @@ public class RoleController {
 
     @GetMapping("/getRoleMenuList/{id}")
     @Menu(firstMenu = FirstMenuEnum.SYSTEM_MANAGEMENT, secondMenu = SecondMenuEnum.ROLE_MANAGEMENT)
-    @CostTime(interfaceName = "getRoleMenus")
+//    @CostTime(interfaceName = "getRoleMenus")
     public RestResult<List<RoleMenuResp>> getRoleMenus(@PathVariable int id) {
         VideoSystemRole role = userRoleService.getRole(id);
         if (role == null) {
