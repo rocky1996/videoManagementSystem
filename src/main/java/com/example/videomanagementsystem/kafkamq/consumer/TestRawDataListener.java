@@ -15,17 +15,15 @@ import java.util.Optional;
 @Slf4j
 public class TestRawDataListener {
 
-    @Value("${kafka.topic}")
+    @Value("${kafka.test-topic}")
     private String topicName;
-    @Value("${kafka.consumer.group.id}")
-    private String groupId;
 
     /**
      * 监听消费
      * @param record
      * @throws IOException
      */
-    @KafkaListener(topics = "${kafka.topic}")
+    @KafkaListener(topics = "${kafka.test-topic}")
     public void listen(ConsumerRecord<?, ?> record) throws IOException {
         if (topicName.equals(record.topic())) {
             Optional<?> kafkaMessage = Optional.ofNullable(record.value());

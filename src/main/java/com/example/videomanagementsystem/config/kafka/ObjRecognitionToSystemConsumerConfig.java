@@ -16,12 +16,9 @@ import org.springframework.kafka.listener.ConcurrentMessageListenerContainer;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * kafka消费者配置
- */
 @Configuration
 @EnableKafka
-public class KafkaConsumerConfig {
+public class ObjRecognitionToSystemConsumerConfig {
     @Value("${kafka.bootstrap-servers}")
     private String servers;
     @Value("${kafka.consumer.enable.auto.commit}")
@@ -30,7 +27,7 @@ public class KafkaConsumerConfig {
     private String sessionTimeout;
     @Value("${kafka.consumer.auto.commit.interval}")
     private String autoCommitInterval;
-    @Value("${kafka.consumer.group.id}")
+    @Value("${kafka.consumer.group.objRecognition2System-id}")
     private String groupId;
     @Value("${kafka.consumer.auto.offset.reset}")
     private String autoOffsetReset;

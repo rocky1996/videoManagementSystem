@@ -2,13 +2,12 @@ package com.example.videomanagementsystem.kafkamq.mqBean;
 
 import lombok.Builder;
 import lombok.Data;
-import lombok.experimental.Accessors;
 
 import java.time.LocalDateTime;
 
 @Data
 @Builder
-public class LogMsg {
+public class TestLogMsg {
     private Long id;
 
     private String msg;
