@@ -37,7 +37,7 @@ public class ObjRecognitionToSystemBean {
 
     @Data
     @Builder
-    private static class MsgBody {
+    public static class MsgBody {
 
         /**
          * 人物

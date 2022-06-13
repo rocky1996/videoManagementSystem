@@ -2,7 +2,14 @@
     https://console-docs.apipost.cn/preview/3b677b4073aaae92/1492df02fe6dda62
 github地址:
     https://github.com/rocky1996/videoManagementSystem
+sql图形化地址:
+    http://47.93.185.66:8082/index.php?route=/&route=%2F
+kafkaManager:
+    http://47.93.185.66:9000/
+docker监控:
+    http://47.93.185.66:10051/login
 
+-------------------------与第三方交互规定的topic/group----------------------------
 本系统 -> 物体识别
     topicName: systemToDistinguish
     groupName: systemToDistinguish-group-one
