@@ -39,6 +39,7 @@ public class CommonController {
     public RestResult<List<MediaScopeResp>> getTaskMediaScopeList() {
         return new RestResult<>(RestEnum.SUCCESS, Arrays.stream(MediaSourceEnum.values()).map(e -> new MediaScopeResp().setMediaId(e.getCode()).setMediaName(e.getName())).collect(Collectors.toList()));
     }
+
     @GetMapping("/getTaskTypeList")
     @Menu(firstMenu = FirstMenuEnum.TASK_DISTRIBUTION)
     @CostTime(interfaceName = "getTaskTypeList")
