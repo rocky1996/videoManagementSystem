@@ -27,14 +27,14 @@ public class KafkaProducerConfig {
     private int bufferMemory;
 
     public Map<String,Object> producerConfigs(){
-        Map<String,Object> props = new HashMap<>();
-        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,servers);
-        props.put(ProducerConfig.RETRIES_CONFIG, retries);
-        props.put(ProducerConfig.BATCH_SIZE_CONFIG, batchSize);
-        props.put(ProducerConfig.BUFFER_MEMORY_CONFIG, bufferMemory);
-        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-        return props;
+        Map<String,Object> propsMap = new HashMap<>();
+        propsMap.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,servers);
+        propsMap.put(ProducerConfig.RETRIES_CONFIG, retries);
+        propsMap.put(ProducerConfig.BATCH_SIZE_CONFIG, batchSize);
+        propsMap.put(ProducerConfig.BUFFER_MEMORY_CONFIG, bufferMemory);
+        propsMap.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        propsMap.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        return propsMap;
     }
 
     public ProducerFactory<String,String> producerFactory(){

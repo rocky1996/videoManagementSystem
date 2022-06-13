@@ -20,8 +20,12 @@ public class Producer {
     private String topic;
 
     public void send(){
-        LogMsg logMsg = new LogMsg();
-        logMsg.setId(System.currentTimeMillis()).setMsg(UUID.randomUUID().toString()).setSendTime(LocalDateTime.now());
+        LogMsg logMsg = LogMsg
+                .builder()
+                .id(System.currentTimeMillis())
+                .msg(UUID.randomUUID().toString())
+                .sendTime(LocalDateTime.now())
+                .build();
         kafkaTemplate.send(topic, JacksonUtil.beanToStr(logMsg));
     }
 }

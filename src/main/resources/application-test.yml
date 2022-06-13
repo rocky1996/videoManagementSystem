@@ -44,7 +44,7 @@ mybatis:
 
 kafka:
   bootstrap-servers: 47.93.185.66:5672
-  topic: wujinfan
+  topic: rocky
   producer:
     retries: 0
     key-serializer: org.apache.kafka.common.serialization.StringSerializer

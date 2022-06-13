@@ -1,6 +1,7 @@
 package com.example.videomanagementsystem.kafkamq.consumer;
 
 
+import com.example.videomanagementsystem.util.JacksonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.beans.factory.annotation.Value;
@@ -8,6 +9,7 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.Optional;
 
 @Component
 @Slf4j
@@ -19,18 +21,19 @@ public class RawDataListener {
     private String groupId;
 
     /**
-     * 实时获取kafka数据(生产一条，监听生产topic自动消费一条)
+     * 监听消费
      * @param record
      * @throws IOException
      */
-    @KafkaListener(topics = {"${kafka.topic}"})
+    @KafkaListener(topics = "${kafka.topic}")
     public void listen(ConsumerRecord<?, ?> record) throws IOException {
-        String value = (String) record.value();
-        String topic = record.topic();
-        if(topicName.equals(topic)){
-            System.out.println("接收到的信息为："+ value);
-        }else {
-            System.out.println("没有监听到消息");
+        if (topicName.equals(record.topic())) {
+            Optional<?> kafkaMessage = Optional.ofNullable(record.value());
+            if (kafkaMessage.isPresent()) {
+                Object message = kafkaMessage.get();
+                log.info("record:{}", JacksonUtil.beanToStr(record));
+                log.info("message:{}", JacksonUtil.beanToStr(message));
+            }
         }
     }
 }
