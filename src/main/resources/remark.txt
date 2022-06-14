@@ -53,6 +53,10 @@ https://blog.csdn.net/HYEHYEHYE/article/details/122000352
 用ffmpeg将视频文件中的音频文件导出为wav格式
 ffmpeg -i "视频文件路径" -y  -acodec pcm_s16le -b:a 16  -ac 1 -ar 16000  "导出的wav文件（后缀名为wav)"
 这个命令就是将视频文件转化为单通道16bit，采样率是16000的wav文件，记住导出的wav文件后缘是.wav
+eg:http://1400174353.vod2.myqcloud.com/d1db0086vodtranscq1400174353/ef0b694a387702299630204331/v.f30.mp4
+success:
+    ffmpeg -i "http://1400174353.vod2.myqcloud.com/d1db0086vodtranscq1400174353/ef0b694a387702299630204331/v.f30.mp4" -y  -acodec pcm_s16le -b:a 16  -ac 1 -ar 16000  "C:\home\telangpu.wav"
+
 
 微软语音识别
 区域 chinanorth2
@@ -62,3 +66,59 @@ sdk示例代码如下git地址 https://github.com/Azure-Samples/cognitive-servic
 
 中译语音翻译
 http://translateport.yeekit.com/translate
+eg:
+result:{
+    "translation": [
+        {
+            "translated": [
+                {
+                    "src-tokenized": [
+                        [
+                            "OK, Pierce, I'm ready.",
+                            "A former president in denial be completely straight to your face.",
+                            "I think I'm a very honest man.",
+                            "Much more honest than you, actually.",
+                            "Really.",
+                            "Yeah.",
+                            "It was a free and fair election.",
+                            "You lost.",
+                            "Only a fool would think I do now with.",
+                            "Excuse me.",
+                            "Excuse me.",
+                            "The most explosive interview of the year.",
+                            "I don't think you're real.",
+                            "I'm not very disciplined.",
+                            "Let's finish up the interview.",
+                            "Morgan versus trick camera."
+                        ]
+                    ],
+                    "score": -1.0,
+                    "rank": 0,
+                    "text": "好的，皮尔斯，我准备好了。 拒绝承认的前总统必须面对你。 我觉得我是个很诚实的人。 实际上，比你诚实得多。 真的。 是啊。 这是一次自由公正的选举。 你输了。 只有傻瓜才会认为我现在. 不好意思。 不好意思。 今年最具爆炸性的采访。 我觉得你不是真的。 我不太守纪律。 让我们结束面试吧。 摩根对特技摄像机。",
+                    "translate time": "0.0873",
+                    "translation list": [
+                        [
+                            "好的，皮尔斯，我准备好了。",
+                            "拒绝承认的前总统必须面对你。",
+                            "我觉得我是个很诚实的人。",
+                            "实际上，比你诚实得多。",
+                            "真的。",
+                            "是啊。",
+                            "这是一次自由公正的选举。",
+                            "你输了。",
+                            "只有傻瓜才会认为我现在.",
+                            "不好意思。",
+                            "不好意思。",
+                            "今年最具爆炸性的采访。",
+                            "我觉得你不是真的。",
+                            "我不太守纪律。",
+                            "让我们结束面试吧。",
+                            "摩根对特技摄像机。"
+                        ]
+                    ]
+                }
+            ],
+            "translationId": "bb997d25b391460196c7ec7340262a43"
+        }
+    ]
+}

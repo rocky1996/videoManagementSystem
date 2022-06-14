@@ -4,8 +4,10 @@ import com.example.videomanagementsystem.controller.req.KnowLedgeReq;
 import com.example.videomanagementsystem.outerInterface.outerConstants.OutUrlContants;
 import com.example.videomanagementsystem.outerInterface.outerResp.OuterResp;
 import com.example.videomanagementsystem.util.JacksonUtil;
+
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StopWatch;
@@ -61,26 +63,34 @@ public class KnowledgeOuterServiceImpl {
      * @return
      */
     public Map<String, Object> getKnowLedgeInfo(KnowLedgeReq knowLedgeReq) {
+        try {
+            if (knowLedgeReq == null) {
+                log.info("KnowledgeOuterServiceImpl.getKnowLedgeInfo,knowLedgeReq is null");
+                return null;
+            }
 
-        StopWatch stopWatch = new StopWatch();
-        stopWatch.start();
-        Map<String, Object> paramMap = new HashMap<>();
-        paramMap.put(KEY_KEY, KEY_VALUE);
-        paramMap.put(KG_KEY, KG_VALUE);
-        paramMap.put(ENTITY_NAME_KEY, ENTITY_NAME_VALUE);
-        paramMap.put(ENTITY_TYPE_KEY, ENTITY_TYPE_VALUE);
-        paramMap.put(KEY_WORD_KEY, knowLedgeReq.getKeyWord());
-        paramMap.put(MODE_KEY, MODE_VALUE);
-        paramMap.put(NATION_KEY, NATION_VALUE);
-        paramMap.put(PAGE_KEY, knowLedgeReq.getPage() != null ? knowLedgeReq.getPage() : PAGE_VALUE);
-        paramMap.put(PAGE_SIZE_KEY, knowLedgeReq.getPageSize() != null ? knowLedgeReq.getPageSize() : PAGE_SIZE_VALUE);
-        OuterResp outerResp = restTemplate.getForObject(OutUrlContants.KNOWLEDGE_URL, OuterResp.class, paramMap);
-        stopWatch.stop();
-        log.info("获取知识图谱远程接口数据,paramMap:{},outerResp:{},time:{}", JacksonUtil.beanToStr(paramMap), JacksonUtil.beanToStr(outerResp), stopWatch.getTotalTimeMillis());
+            StopWatch stopWatch = new StopWatch();
+            stopWatch.start();
+            Map<String, Object> paramMap = new HashMap<>();
+            paramMap.put(KEY_KEY, KEY_VALUE);
+            paramMap.put(KG_KEY, KG_VALUE);
+            paramMap.put(ENTITY_NAME_KEY, ENTITY_NAME_VALUE);
+            paramMap.put(ENTITY_TYPE_KEY, ENTITY_TYPE_VALUE);
+            paramMap.put(KEY_WORD_KEY, knowLedgeReq.getKeyWord());
+            paramMap.put(MODE_KEY, MODE_VALUE);
+            paramMap.put(NATION_KEY, NATION_VALUE);
+            paramMap.put(PAGE_KEY, knowLedgeReq.getPage() != null ? knowLedgeReq.getPage() : PAGE_VALUE);
+            paramMap.put(PAGE_SIZE_KEY, knowLedgeReq.getPageSize() != null ? knowLedgeReq.getPageSize() : PAGE_SIZE_VALUE);
+            OuterResp outerResp = restTemplate.getForObject(OutUrlContants.KNOWLEDGE_URL, OuterResp.class, paramMap);
+            stopWatch.stop();
+            log.info("获取知识图谱远程接口数据,paramMap:{},outerResp:{},time:{}", JacksonUtil.beanToStr(paramMap), JacksonUtil.beanToStr(outerResp), stopWatch.getTotalTimeMillis());
 
-        if (outerResp.getCode() == 200 && outerResp.isSuccess()) {
-            Map<String, Object> resultMap = (Map<String, Object>)outerResp.getData();
-            return Objects.isNull(resultMap) ? null : resultMap;
+            if (outerResp.getCode() == 200 && outerResp.isSuccess()) {
+                Map<String, Object> resultMap = (Map<String, Object>) outerResp.getData();
+                return Objects.isNull(resultMap) ? null : resultMap;
+            }
+        }catch (Exception e) {
+            log.error("KnowledgeOuterServiceImpl.getKnowLedgeInfo has error",e.getMessage());
         }
         return null;
     }
