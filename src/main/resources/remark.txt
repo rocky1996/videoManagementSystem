@@ -45,3 +45,20 @@ docker监控:
         "nowTime":"",
         ......
     }
+
+
+-------------------------AI接口----------------------------
+ffmpeg.exe 视频转化工具，下载地址
+https://objects.githubusercontent.com/github-production-release-asset-2e65be/306803927/eab23642-b664-483b-b710-c3a1e425dad0?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20220424%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220424T101724Z&X-Amz-Expires=300&X-Amz-Signature=a6c448dabef6079410aa22d089248891a3771445250cb2cd78d06998bcc220d4&X-Amz-SignedHeaders=host&actor_id=0&key_id=0&repo_id=306803927&response-content-disposition=attachment%3B%20filename%3Dffmpeg-2022-04-21-git-83e1a1de88-full_build.7z&response-content-type=application%2Foctet-stream
+用ffmpeg将视频文件中的音频文件导出为wav格式
+ffmpeg -i "视频文件路径" -y  -acodec pcm_s16le -b:a 16  -ac 1 -ar 16000  "导出的wav文件（后缀名为wav)"
+这个命令就是将视频文件转化为单通道16bit，采样率是16000的wav文件，记住导出的wav文件后缘是.wav
+
+微软语音识别
+区域 chinanorth2
+key aecff464cd81425eaa96bb96dcf73a55
+sdk文档地址 https://docs.azure.cn/zh-cn/cognitive-services/speech-service/
+sdk示例代码如下git地址 https://github.com/Azure-Samples/cognitive-services-speech-sdk/tree/master/samples/java/jre/console/src/com/microsoft/cognitiveservices/speech/samples/console
+
+中译语音翻译
+http://translateport.yeekit.com/translate
