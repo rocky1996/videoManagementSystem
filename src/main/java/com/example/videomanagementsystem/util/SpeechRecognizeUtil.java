@@ -15,7 +15,8 @@ public class SpeechRecognizeUtil {
 
     public static String recognize(String targetFilePath) {
         try {
-            SpeechConfig speechConfig = SpeechConfig.fromSubscription(UrlConstants.SECRET_KEY, UrlConstants.AREA);
+            SpeechConfig speechConfig =
+                    SpeechConfig.fromSubscription(UrlConstants.SECRET_KEY, UrlConstants.AREA);
             speechConfig.setSpeechRecognitionLanguage(UrlConstants.LANGUAGE_TYPE);
             AudioConfig audioConfig = AudioConfig.fromWavFileInput(targetFilePath);
 
