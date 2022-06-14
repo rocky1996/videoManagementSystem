@@ -6,6 +6,9 @@ spring:
   profiles:
     active: test
 
+  main:
+    allow-bean-definition-overriding: true
+
 #配置日志
 logging:
   config: classpath:logback-boot.xml
