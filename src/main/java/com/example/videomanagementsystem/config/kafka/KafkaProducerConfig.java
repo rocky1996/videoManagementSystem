@@ -1,5 +1,6 @@
 package com.example.videomanagementsystem.config.kafka;
 
+import com.google.common.collect.Maps;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,7 +28,7 @@ public class KafkaProducerConfig {
     private int bufferMemory;
 
     public Map<String,Object> producerConfigs(){
-        Map<String,Object> propsMap = new HashMap<>();
+        Map<String,Object> propsMap = Maps.newHashMap();
         propsMap.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,servers);
         propsMap.put(ProducerConfig.RETRIES_CONFIG, retries);
         propsMap.put(ProducerConfig.BATCH_SIZE_CONFIG, batchSize);

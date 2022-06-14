@@ -1,6 +1,7 @@
 package com.example.videomanagementsystem.config.kafka;
 
 import com.example.videomanagementsystem.kafkamq.consumer.CollectToSystemListener;
+import com.google.common.collect.Maps;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -36,7 +37,7 @@ public class CollectToSystemConsumerConfig {
     private int concurrency;
 
     public Map<String, Object> consumerConfigs() {
-        Map<String, Object> propsMap = new HashMap<>();
+        Map<String, Object> propsMap = Maps.newHashMap();
         propsMap.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, servers);
         propsMap.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, enableAutoCommit);
         propsMap.put(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, autoCommitInterval);
