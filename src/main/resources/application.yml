@@ -12,3 +12,9 @@ spring:
 #配置日志
 logging:
   config: classpath:logback-boot.xml
+
+#微软语音识别,区域&密钥
+weiRuan:
+  speechRecognition:
+    area: chinanorth2
+    secretKey: aecff464cd81425eaa96bb96dcf73a55
