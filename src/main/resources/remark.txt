@@ -35,3 +35,13 @@ docker监控:
             "locationInfo":["","",""]
         }
     }
+
+采集系统 -> 本系统
+    topicName: collectToSystem
+    groupName: collectToSystem-group-one
+    message:
+    {
+        "videoUrl":"",
+        "nowTime":"",
+        ......
+    }

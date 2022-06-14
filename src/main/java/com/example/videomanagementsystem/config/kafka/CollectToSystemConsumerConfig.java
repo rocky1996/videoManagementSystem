@@ -1,7 +1,6 @@
 package com.example.videomanagementsystem.config.kafka;
 
-import com.example.videomanagementsystem.kafkamq.consumer.ObjRecognitionToSystemListener;
-import com.example.videomanagementsystem.kafkamq.consumer.TestRawDataListener;
+import com.example.videomanagementsystem.kafkamq.consumer.CollectToSystemListener;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,7 +18,8 @@ import java.util.Map;
 
 @Configuration
 @EnableKafka
-public class ObjRecognitionToSystemConsumerConfig {
+public class CollectToSystemConsumerConfig {
+
     @Value("${kafka.bootstrap-servers}")
     private String servers;
     @Value("${kafka.consumer.enable.auto.commit}")
@@ -28,7 +28,7 @@ public class ObjRecognitionToSystemConsumerConfig {
     private String sessionTimeout;
     @Value("${kafka.consumer.auto.commit.interval}")
     private String autoCommitInterval;
-    @Value("${kafka.consumer.group.objRecognition2System-group-id}")
+    @Value("${kafka.consumer.group.collect2System-group-id}")
     private String groupId;
     @Value("${kafka.consumer.auto.offset.reset}")
     private String autoOffsetReset;
@@ -66,7 +66,7 @@ public class ObjRecognitionToSystemConsumerConfig {
      * @return
      */
     @Bean
-    public ObjRecognitionToSystemListener listener() {
-        return new ObjRecognitionToSystemListener();
+    public CollectToSystemListener listener() {
+        return new CollectToSystemListener();
     }
 }

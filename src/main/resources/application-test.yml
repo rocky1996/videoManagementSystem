@@ -47,6 +47,7 @@ kafka:
   test-topic: rocky
   system2objRecognition-topic: systemToDistinguish
   objRecognition2System-topic: distinguishToSystem
+  collect2System-topic: collectToSystem
   producer:
     retries: 0
     key-serializer: org.apache.kafka.common.serialization.StringSerializer
@@ -67,7 +68,8 @@ kafka:
     group:
       test-id: consumer-group-id  #测试消费组id
 #      system2objRecognition-id: systemToDistinguish-group-one
-      objRecognition2System-id: distinguishToSystem-group-one
+      objRecognition2System-group-id: distinguishToSystem-group-one
+      collect2System-group-id: collectToSystem-group-one
     concurrency: 10   #设置消费线程数
 
 pagehelper:
