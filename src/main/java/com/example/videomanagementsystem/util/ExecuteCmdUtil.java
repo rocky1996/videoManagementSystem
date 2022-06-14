@@ -30,8 +30,8 @@ public class ExecuteCmdUtil {
         }
     }
 
-//    public static void main(String[] args) throws Exception{
-//        Integer result = executeCmdCommand("java -version");
-//        log.info("result:{}",result);
-//    }
+    public static void main(String[] args) throws Exception{
+        Integer result = executeCmdCommand("java -version");
+        log.info("result:{}",result);
+    }
 }

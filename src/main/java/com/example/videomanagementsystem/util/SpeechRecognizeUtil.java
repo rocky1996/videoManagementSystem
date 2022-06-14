@@ -1,5 +1,6 @@
 package com.example.videomanagementsystem.util;
 
+import com.example.videomanagementsystem.constants.UrlConstants;
 import com.microsoft.cognitiveservices.speech.ResultReason;
 import com.microsoft.cognitiveservices.speech.SpeechConfig;
 import com.microsoft.cognitiveservices.speech.SpeechRecognitionResult;
@@ -14,8 +15,8 @@ public class SpeechRecognizeUtil {
 
     public static String recognize(String targetFilePath) {
         try {
-            SpeechConfig speechConfig = SpeechConfig.fromSubscription("aecff464cd81425eaa96bb96dcf73a55", "chinanorth2");
-            speechConfig.setSpeechRecognitionLanguage("en-US");
+            SpeechConfig speechConfig = SpeechConfig.fromSubscription(UrlConstants.SECRET_KEY, UrlConstants.AREA);
+            speechConfig.setSpeechRecognitionLanguage(UrlConstants.LANGUAGE_TYPE);
             AudioConfig audioConfig = AudioConfig.fromWavFileInput(targetFilePath);
 
             SpeechRecognizer speechRecognizer = new SpeechRecognizer(speechConfig,"en-US", audioConfig);

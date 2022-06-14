@@ -8,4 +8,9 @@ public class UrlConstants {
     public static final String ROLE_URL = "/videoSystem/role";
     public static final String TASK_URL = "/videoSystem/task";
     public static final String USER_URL = "/videoSystem/user";
+
+    /****************************音频转文字接口密钥*********************************/
+    public static final String AREA = "chinanorth2";
+    public static final String SECRET_KEY = "aecff464cd81425eaa96bb96dcf73a55";
+    public static final String LANGUAGE_TYPE = "en-US";
 }
