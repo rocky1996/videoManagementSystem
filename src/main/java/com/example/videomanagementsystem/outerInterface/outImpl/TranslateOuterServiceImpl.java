@@ -1,6 +1,6 @@
 package com.example.videomanagementsystem.outerInterface.outImpl;
 
-import com.example.videomanagementsystem.outerInterface.outerConstants.OutUrlContants;
+import com.example.videomanagementsystem.outerInterface.outerConstants.OutUrlConstants;
 import com.example.videomanagementsystem.util.JacksonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -49,7 +49,7 @@ public class TranslateOuterServiceImpl {
             paramMap.add(CHINESE_PARAM_KEY, CHINESE_PARAM_VALUE);
             paramMap.add(TEXT_KEY, textValue);
             HttpEntity<MultiValueMap<String, Object>> requestParam = new HttpEntity<>(paramMap, httpHeader);
-            ResponseEntity<String> outerResp = restTemplate.postForEntity(OutUrlContants.VIDEO_TRANSLATE_URL, requestParam, String.class);
+            ResponseEntity<String> outerResp = restTemplate.postForEntity(OutUrlConstants.VIDEO_TRANSLATE_URL, requestParam, String.class);
             stopWatch.stop();
             log.info("获取中译语音翻译数据,requestParam:{},outerResp:{},time:{}", JacksonUtil.beanToStr(requestParam), JacksonUtil.beanToStr(outerResp), stopWatch.getTotalTimeMillis());
 

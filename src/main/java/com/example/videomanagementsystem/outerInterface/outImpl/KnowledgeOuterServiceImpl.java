@@ -1,8 +1,8 @@
 package com.example.videomanagementsystem.outerInterface.outImpl;
 
 import com.example.videomanagementsystem.controller.req.KnowLedgeReq;
-import com.example.videomanagementsystem.outerInterface.outerConstants.OutUrlContants;
-import com.example.videomanagementsystem.outerInterface.outerResp.OuterResp;
+import com.example.videomanagementsystem.outerInterface.outerConstants.OutUrlConstants;
+import com.example.videomanagementsystem.outerInterface.outerResp.KnowLedgeResp;
 import com.example.videomanagementsystem.util.JacksonUtil;
 
 import lombok.extern.slf4j.Slf4j;
@@ -81,12 +81,12 @@ public class KnowledgeOuterServiceImpl {
             paramMap.put(NATION_KEY, NATION_VALUE);
             paramMap.put(PAGE_KEY, knowLedgeReq.getPage() != null ? knowLedgeReq.getPage() : PAGE_VALUE);
             paramMap.put(PAGE_SIZE_KEY, knowLedgeReq.getPageSize() != null ? knowLedgeReq.getPageSize() : PAGE_SIZE_VALUE);
-            OuterResp outerResp = restTemplate.getForObject(OutUrlContants.KNOWLEDGE_URL, OuterResp.class, paramMap);
+            KnowLedgeResp knowLedgeResp = restTemplate.getForObject(OutUrlConstants.KNOWLEDGE_URL, KnowLedgeResp.class, paramMap);
             stopWatch.stop();
-            log.info("获取知识图谱远程接口数据,paramMap:{},outerResp:{},time:{}", JacksonUtil.beanToStr(paramMap), JacksonUtil.beanToStr(outerResp), stopWatch.getTotalTimeMillis());
+            log.info("获取知识图谱远程接口数据,paramMap:{},outerResp:{},time:{}", JacksonUtil.beanToStr(paramMap), JacksonUtil.beanToStr(knowLedgeResp), stopWatch.getTotalTimeMillis());
 
-            if (outerResp.getCode() == 200 && outerResp.isSuccess()) {
-                Map<String, Object> resultMap = (Map<String, Object>) outerResp.getData();
+            if (knowLedgeResp.getCode() == 200 && knowLedgeResp.isSuccess()) {
+                Map<String, Object> resultMap = (Map<String, Object>) knowLedgeResp.getData();
                 return Objects.isNull(resultMap) ? null : resultMap;
             }
         }catch (Exception e) {
@@ -101,6 +101,6 @@ public class KnowledgeOuterServiceImpl {
      * @return
      */
     public String getKnowledgeDetailUrl(String entityId) {
-        return StringUtils.isNotBlank(entityId) ? OutUrlContants.KNOWLEDGE_DETAIL_URL + entityId : "";
+        return StringUtils.isNotBlank(entityId) ? OutUrlConstants.KNOWLEDGE_DETAIL_URL + entityId : "";
     }
 }

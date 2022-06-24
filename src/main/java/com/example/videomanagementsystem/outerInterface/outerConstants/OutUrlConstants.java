@@ -1,6 +1,6 @@
 package com.example.videomanagementsystem.outerInterface.outerConstants;
 
-public class OutUrlContants {
+public class OutUrlConstants {
 
     /*************任务下发**************/
     //TODO

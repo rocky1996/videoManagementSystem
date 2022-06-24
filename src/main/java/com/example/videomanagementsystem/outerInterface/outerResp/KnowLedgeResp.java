@@ -3,7 +3,7 @@ package com.example.videomanagementsystem.outerInterface.outerResp;
 import lombok.Data;
 
 @Data
-public class OuterResp {
+public class KnowLedgeResp {
 
     private boolean success;
     private int code;
