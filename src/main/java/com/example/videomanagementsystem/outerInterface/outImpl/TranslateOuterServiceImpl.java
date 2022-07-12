@@ -46,7 +46,7 @@ public class TranslateOuterServiceImpl {
             StopWatch stopWatch = new StopWatch();
             stopWatch.start();
             HttpHeaders httpHeader = new HttpHeaders();
-//            httpHeader.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+            httpHeader.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
             MultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<>();
             paramMap.add(ENGLISH_PARAM_KEY, ENGLISH_PARAM_VALUE);
             paramMap.add(CHINESE_PARAM_KEY, CHINESE_PARAM_VALUE);
